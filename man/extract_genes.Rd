@@ -2,7 +2,7 @@
 % Please edit documentation in R/extract_genes.R
 \name{extract_genes}
 \alias{extract_genes}
-\title{Extract genes information from genomic structural annotation GFF or GTF}
+\title{Extract genes information from GFF or GTF}
 \usage{
 extract_genes(gff_file, format = "auto", gene_info = "all")
 }
@@ -17,7 +17,7 @@ extract_genes(gff_file, format = "auto", gene_info = "all")
 A \emph{GRanges} object.
 }
 \description{
-Extract genes information from genomic structural annotation GFF or GTF.
+Extract genes information from GFF or GTF.
 }
 \examples{
 # Example GFF3 file in SlideAnno

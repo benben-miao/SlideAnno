@@ -1,5 +1,5 @@
-#' @title Extract genes information from genomic structural annotation GFF or GTF
-#' @description Extract genes information from genomic structural annotation GFF or GTF.
+#' @title Extract genes information from GFF or GTF
+#' @description Extract genes information from GFF or GTF.
 #' @author benben-miao
 #'
 #' @return A \emph{GRanges} object.

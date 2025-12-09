@@ -49,7 +49,7 @@ extract_mrnas <- function(
   # Extract Genes
   mrnas <- suppressWarnings(GenomicFeatures::transcripts(txdb))
 
-  # Genes info
+  # mRNA info
   if (mrna_info == "all") {
   	mrnas
   } else if (mrna_info == "chrom_id") {
