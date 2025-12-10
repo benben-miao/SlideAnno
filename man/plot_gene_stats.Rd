@@ -39,7 +39,10 @@ gff_file <- system.file(
 # Plot gene stats
 plot_gene_stats(
     gff_file = gff_file,
-    format = "auto")
+    format = "auto",
+    bar_width = 0.7,
+    bar_color = "#0055ff55",
+    lable_size = 3)
 
 }
 \author{
