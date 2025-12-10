@@ -7,6 +7,7 @@
 plot_chrom_structure(
   gff_file,
   format = "auto",
+  orientation = "vertical",
   bar_width = 0.6,
   chrom_alpha = 0.1,
   gene_width = 0.5,
@@ -20,6 +21,8 @@ plot_chrom_structure(
 \item{gff_file}{Genomic structural annotation \bold{\file{GFF3/GTF}} file path.}
 
 \item{format}{Format of GFF3/GTF file. (\bold{\emph{"auto"}}, "gff3", "gtf").}
+
+\item{orientation}{Coordinate orientation: (\bold{\emph{"vertical"}}, "horizontal").}
 
 \item{bar_width}{Chromosome bars relative width. (\bold{\emph{0.6}}).}
 
@@ -51,6 +54,7 @@ gff_file <- system.file(
 plot_chrom_structure(
   gff_file = gff_file,
   format = "auto",
+  orientation = "vertical",
   bar_width = 0.6,
   chrom_alpha = 0.1,
   gene_width = 0.5,
