@@ -24,9 +24,16 @@
 #'
 #' plot_chrom_structure(
 #'   gff_file = gff_file,
-#'   format = "auto"
+#'   format = "auto",
+#'   bar_width = 0.6,
+#'   chrom_alpha = 0.1,
+#'   gene_width = 0.5,
+#'   chrom_color = "#008888",
+#'   gene_color = "#0088ff",
+#'   telomere_color = "#ff0000",
+#'   label_size = 3
 #' )
-#' print(p)
+#'
 plot_chrom_structure <- function(gff_file,
                                  format = "auto",
                                  bar_width = 0.6,
