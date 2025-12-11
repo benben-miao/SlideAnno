@@ -1,7 +1,7 @@
 #' @title Annotate differentially expressed genes (DEGs) with chromosome positions
 #' @description Annotate \bold{\emph{differentially expressed genes (DEGs)}} with chromosome positions.
 #'
-#' @return A data.frame with columns: (\bold{\emph{chrom, start}, end, GeneID, log2FoldChange, strand}}).
+#' @return A data.frame with columns: (\bold{\emph{chrom, start, end, GeneID, log2FoldChange, strand}}).
 #' @param deg_file DEG table from \bold{\emph{DESeq2}} analysis.
 #' @param gff_file Genomic structural annotation \bold{\file{GFF3/GTF}} file path.
 #' @param format Format of GFF3/GTF file. (\bold{\emph{"auto"}}, "gff3", "gtf").
@@ -69,7 +69,7 @@ anno_deg_chrom <- function(deg_file,
   deg_cols <- deg[, c(id_col, fc_col), drop = FALSE]
   colnames(deg_cols) <- c("gene_id", "score")
 
-  # resput
+  # Results
   res <- dplyr::inner_join(df_genes, deg_cols, by = "gene_id")
   if (!use_strand)
     res$strand <- "*"
