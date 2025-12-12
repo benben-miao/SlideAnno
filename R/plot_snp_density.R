@@ -18,17 +18,17 @@
 #'   package = "SlideAnno")
 #'
 #' # Plot SNP density
-#' plot_chrom_snp(
+#' plot_snp_density(
 #'   fst_file = fst_file,
 #'   LOG10 = FALSE,
 #'   bin_size = 1e6,
 #'   density_color = c("#0088ff", "#ff8800", "#ff0000")
 #' )
 #'
-plot_chrom_snp <- function(fst_file,
-                           LOG10 = FALSE,
-                           bin_size = 1e6,
-                           density_color = c("#0088ff", "#ff8800", "#ff0000")) {
+plot_snp_density <- function(fst_file,
+                             LOG10 = FALSE,
+                             bin_size = 1e6,
+                             density_color = c("#0088ff", "#ff8800", "#ff0000")) {
   # FST
   fst <- utils::read.table(
     fst_file,
