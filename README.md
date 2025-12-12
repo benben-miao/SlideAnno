@@ -1,920 +1,471 @@
-SeuratVisPro
+GAnnoViz
 ================
 
-- [SeuratVisPro](#seuratvispro)
+- [GAnnoViz](#gannoviz)
   - [1. Introduction](#1-introduction)
   - [2. Installation](#2-installation)
   - [3. Shiny App](#3-shiny-app)
   - [4. Usages](#4-usages)
 
-# SeuratVisPro
+# GAnnoViz
 
 ## 1. Introduction
 
-**SourceCode:** <https://github.com/benben-miao/SeuratVisPro/>
+**SourceCode:** <https://github.com/benben-miao/GAnnoViz/>
 
-**Website API**: <https://benben-miao.github.io/SeuratVisPro/>
+**Website API**: <https://benben-miao.github.io/GAnnoViz/>
 
-SeuratVisPro is an innovative visualization and diagnostic toolkit for
-Seurat v5. It provides cluster stability assessment, batch mixing
-diagnostics, marker atlas visualization, ligand–receptor directional
-scoring, gene trend plotting, dendrograms with similarity heatmaps,
-spatial overlays with non-spatial fallbacks, module score visualization,
-cell cycle views, and more. An optional bs4Dash Shiny app is bundled for
-interactive exploration.
+GAnnoViz: a R package for genomic annotation and visualization.
 
 ## 2. Installation
-
-``` r
-# From GitHub
-# install.packages("remotes")
-# remotes::install_github("benben-miao/SeuratVisPro")
-
-library(SeuratVisPro)
-#> SeuratVisPro 0.1.0 - Innovative Seurat v5 visualization toolkit
-library(Seurat)
-#> Loading required package: SeuratObject
-#> Loading required package: sp
-#> 
-#> Attaching package: 'SeuratObject'
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, t
-library(ggplot2)
-```
 
 ## 3. Shiny App
 
 ``` r
-launchSeuratVisPro()
+# GAnnoVizApp()
 ```
 
 ## 4. Usages
 
-### Example Data
+### Extract Genes
 
 ``` r
-obj <- SeuratVisProExample(
-  n_cells = 300,
-  n_genes = 1000,
-  n_clusters = 10,
-  seed = 123,
-  genes_mt = "^MT-",
-  neighbor_dims = 10,
-  cluster_res = 0.5,
-  umap_dims = 10,
-  spatial = FALSE
+# Example GFF3 file in GAnnoViz
+gff_file <- system.file(
+  "extdata",
+  "example.gff",
+  package = "GAnnoViz")
+
+# Extract Genes
+# genes <- extract_genes(
+#   gff_file = gff_file,
+#   format = "auto",
+#   gene_info = "all")
+# genes
+
+# Gene info: gene_range
+gene_range <- extract_genes(
+  gff_file = gff_file,
+  format = "auto",
+  gene_info = "gene_range")
+head(gene_range)
+#> IRanges object with 6 ranges and 0 metadata columns:
+#>                 start       end     width
+#>             <integer> <integer> <integer>
+#>   HdF000001  10724003  10725460      1458
+#>   HdF000002  10808174  10823308     15135
+#>   HdF000003  10911391  10930352     18962
+#>   HdF000004  10939872  10941326      1455
+#>   HdF000005  10982117  10999259     17143
+#>   HdF000006  11012358  11024009     11652
+```
+
+### Extract CDS
+
+``` r
+# Extract CDS
+# cds <- extract_cds(
+#   gff_file = gff_file,
+#   format = "auto",
+#   cds_info = "all")
+# cds
+
+# CDS info: cds_range
+cds_range <- extract_cds(
+  gff_file = gff_file,
+  format = "auto",
+  cds_info = "cds_range")
+head(cds_range)
+#> IRanges object with 6 ranges and 0 metadata columns:
+#>           start       end     width
+#>       <integer> <integer> <integer>
+#>   [1]    810081    810090        10
+#>   [2]    816466    816734       269
+#>   [3]    818765    818971       207
+#>   [4]    819680    819740        61
+#>   [5]    821042    821214       173
+#>   [6]    825267    825329        63
+```
+
+### Extract Promoters
+
+``` r
+# Extract Promoters
+# promoters <- extract_promoters(
+#   gff_file = gff_file,
+#   format = "auto",
+#   upstream = 2000,
+#   downstream = 200,
+#   promoter_info = "all")
+# promoters
+
+# Promoter info: promoter_range
+promoter_range <- extract_promoters(
+  gff_file = gff_file,
+  format = "auto",
+  upstream = 2000,
+  downstream = 200,
+  promoter_info = "promoter_range")
+head(promoter_range)
+#> IRanges object with 6 ranges and 0 metadata columns:
+#>                     start       end     width
+#>                 <integer> <integer> <integer>
+#>   nbis-mrna-126    807987    810186      2200
+#>   nbis-mrna-127    882426    884625      2200
+#>   nbis-mrna-129    949197    951396      2200
+#>   nbis-mrna-130   1058746   1060945      2200
+#>   nbis-mrna-132   1184302   1186501      2200
+#>   nbis-mrna-134   1259096   1261295      2200
+```
+
+### Extract 5’UTR
+
+``` r
+# Extract 5'UTR
+# utr5 <- extract_utr5(
+#   gff_file = gff_file,
+#   format = "auto",
+#   utr5_info = "all")
+# utr5
+
+# 5'UTR info: utr5_range
+utr5_range <- extract_utr5(
+  gff_file = gff_file,
+  format = "auto",
+  utr5_info = "utr5_range")
+head(utr5_range)
+#> IRanges object with 6 ranges and 0 metadata columns:
+#>         start       end     width
+#>     <integer> <integer> <integer>
+#>   1    809987    810080        94
+#>   2    884426    884645       220
+#>   3    951197    951558       362
+#>   3    952741    952756        16
+#>   4   1060746   1060848       103
+#>   6   1261096   1261128        33
+```
+
+### Plot gene stats for chromosomes
+
+``` r
+# Plot gene stats
+plot_gene_stats(
+    gff_file = gff_file,
+    format = "auto",
+    bar_width = 0.7,
+    bar_color = "#0055ff55",
+    lable_size = 3)
+```
+
+<img src="man/figures/README-plot_gene_stats-1.png" style="display: block; margin: auto;" />
+
+### Plot gene structure (Promoter, 3’UTR, Exon, Intron, 5’UTR)
+
+``` r
+# Plot gene structure
+plot_gene_structure(
+  gff_file = gff_file,
+  format = "auto",
+  gene_id = "HdF029609",
+  upstream = 2000,
+  downstream = 200,
+  feature_alpha = 0.8,
+  intron_width = 1,
+  x_breaks = 10,
+  arrow_length = 5,
+  arrow_count = 1,
+  arrow_unit = "pt",
+  promoter_color = "#ff8800",
+  utr5_color = "#008833",
+  utr3_color = "#ff0033",
+  exon_color = "#0033ff",
+  intron_color = "#333333"
 )
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9485
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Warning: The default method for RunUMAP has changed from calling Python UMAP via reticulate to the R-native UWOT using the cosine metric
-#> To use Python UMAP via reticulate, set umap.method to 'umap-learn' and metric to 'correlation'
-#> This message will be shown once per session
-
-Seurat::DimPlot(obj, group.by = "cluster")
 ```
 
-![](man/figures/README-SeuratVisProExample-1.png)<!-- -->
+<img src="man/figures/README-plot_gene_structure-1.png" style="display: block; margin: auto;" />
 
-### VisQCPanel
+### Plot gene structures for a genomic interval
 
 ``` r
-p <- VisQCPanel(
-  obj,
-  assay = NULL,
-  genes_mt = "^MT-",
-  genes_ribo = "^RPL|^RPS",
-  group.by = "seurat_clusters",
-  interactive = FALSE,
-  palette = "C",
-  violin_width = 0.8,
-  violin_alpha = 0.3,
-  box_width = 0.3,
-  box_alpha = 0.5
+# Plot interval structure
+plot_interval_structure(
+  gff_file = gff_file,
+  format = "auto",
+  chrom_id = "chr1",
+  start = 950000,
+  end = 1180000,
+  x_breaks = 10,
+  upstream = 2000,
+  downstream = 200,
+  feature_alpha = 0.8,
+  intron_width = 1,
+  arrow_count = 1,
+  arrow_length = 5,
+  arrow_unit = "pt",
+  promoter_color = "#ff8800",
+  utr5_color = "#008833",
+  utr3_color = "#ff0033",
+  exon_color = "#0033ff",
+  intron_color = "#333333"
 )
-
-p
 ```
 
-![](man/figures/README-VisQCPanel-1.png)<!-- -->
+<img src="man/figures/README-plot_interval_structure-1.png" style="display: block; margin: auto;" />
 
-### VisClusterStability
+### Plot chromosome structures and gene stats
 
 ``` r
-res <- VisClusterStability(
-  obj,
-  resolution_range = seq(0.2, 1.2, by = 0.2),
-  dims = 1:10,
-  reps = 5,
-  prop = 0.8,
-  palette = "C"
+# Plot chrom structure
+plot_chrom_structure(
+  gff_file = gff_file,
+  format = "auto",
+  orientation = "vertical",
+  bar_width = 0.6,
+  chrom_alpha = 0.1,
+  gene_width = 0.5,
+  chrom_color = "#008888",
+  gene_color = "#0088ff",
+  telomere_color = "#ff0000",
+  label_size = 3
 )
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9794
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9588
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9381
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9175
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8969
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8763
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9794
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9794
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2868
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9788
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9795
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 3115
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9699
-#> Number of communities: 9
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2920
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9768
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9588
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9589
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2868
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9578
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9590
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 3115
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9473
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2920
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9556
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9381
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9383
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2868
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9368
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9384
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 3115
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9249
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2920
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9343
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9175
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9178
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2868
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9157
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9179
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 3115
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9026
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2920
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9130
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8969
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8972
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2868
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8947
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8974
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 3115
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8802
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2920
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8917
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8763
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8767
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2868
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8737
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2831
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8769
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 3115
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8578
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Computing nearest neighbor graph
-#> Computing SNN
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 240
-#> Number of edges: 2920
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.8704
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-#> Scale for colour is already present.
-#> Adding another scale for colour, which will replace the existing scale.
-
-res$plot
 ```
 
-![](man/figures/README-VisClusterStability-1.png)<!-- -->
+<img src="man/figures/README-plot_chrom_structure-1.png" style="display: block; margin: auto;" />
+
+### Plot chromosome structures and gene annotation
 
 ``` r
-head(res$summary)
-#> # A tibble: 6 × 2
-#>   resolution agreement
-#>        <dbl>     <dbl>
-#> 1        0.2     0.402
-#> 2        0.4     0.422
-#> 3        0.6     0.422
-#> 4        0.8     0.441
-#> 5        1       0.422
-#> 6        1.2     0.441
+genes <- data.frame(
+  gene_id = c("HdF029609", "HdF029610"),
+  gene_name = c("GeneA", "GeneB"))
+
+# Vertical, annotate by name
+plot_chrom_genes(
+  gff_file = gff_file,
+  gene_table = genes,
+  annotate = "name",
+  orientation = "vertical")
 ```
 
-### VisMarkerAtlas
+<img src="man/figures/README-plot_chrom_genes-1.png" style="display: block; margin: auto;" />
+
+### Annotate differentially expressed genes (DEGs) with chromosome positions
 
 ``` r
-res <- VisMarkerAtlas(
-  obj,
-  markers_top = 5,
-  logfc_threshold = 0.25,
-  min_percent = 0.1,
-  test_method = "wilcox",
-  palette = "C"
+# Example DEGs GAnnoViz
+deg_file <- system.file(
+  "extdata",
+  "example.deg",
+  package = "GAnnoViz")
+
+deg <- read.table(
+  file = deg_file,
+  header = TRUE,
+  sep = "\t",
+  na.strings = NA,
+  stringsAsFactors = FALSE
 )
-#> Calculating cluster 0
-#> For a (much!) faster implementation of the Wilcoxon Rank Sum Test,
-#> (default method for FindMarkers) please install the presto package
-#> --------------------------------------------
-#> install.packages('devtools')
-#> devtools::install_github('immunogenomics/presto')
-#> --------------------------------------------
-#> After installation of presto, Seurat will automatically use the more 
-#> efficient implementation (no further action necessary).
-#> This message will be shown once per session
-#> Calculating cluster 1
-#> Calculating cluster 2
-#> Calculating cluster 3
-#> Calculating cluster 4
-#> Calculating cluster 5
-#> Calculating cluster 6
-#> Calculating cluster 7
-#> Calculating cluster 8
-#> Calculating cluster 9
-#> As of Seurat v5, we recommend using AggregateExpression to perform pseudo-bulk analysis.
-#> First group.by variable `ident` starts with a number, appending `g` to ensure valid variable names
-#> This message is displayed once per session.
-
-res$plot
+head(deg)
+#>      GeneID    baseMean log2FoldChange     lfcSE      stat       pvalue
+#> 1 HdF054777   16.999581      -1.480620 0.7189789 -2.059337 3.946195e-02
+#> 2 HdF055254   10.012632       3.039624 1.3467639  2.256984 2.400909e-02
+#> 3 HdF055463    3.926022       5.319215 2.2806921  2.332281 1.968590e-02
+#> 4 HdF027237 1433.976916      -1.802171 0.3336465 -5.401438 6.610888e-08
+#> 5 HdF027261  178.124271      -1.049145 0.4681808 -2.240897 2.503274e-02
+#> 6 HdF002748  185.015989       2.051539 0.9494449  2.160778 3.071251e-02
+#>           padj
+#> 1 5.479174e-01
+#> 2 4.341369e-01
+#> 3           NA
+#> 4 2.832689e-05
+#> 5 4.406169e-01
+#> 6 4.865774e-01
 ```
 
-![](man/figures/README-VisMarkerAtlas-1.png)<!-- -->
-
 ``` r
-head(res$markers)
-#> # A tibble: 6 × 7
-#>      p_val avg_log2FC pct.1 pct.2 p_val_adj cluster gene 
-#>      <dbl>      <dbl> <dbl> <dbl>     <dbl> <fct>   <chr>
-#> 1 9.50e-19       1.80 1     0.622  9.50e-16 0       G848 
-#> 2 1.86e-17       1.83 0.976 0.622  1.86e-14 0       G809 
-#> 3 1.92e-17       1.62 1     0.653  1.92e-14 0       G844 
-#> 4 3.46e-17       1.69 1     0.653  3.46e-14 0       G859 
-#> 5 3.79e-17       1.73 0.976 0.653  3.79e-14 0       G847 
-#> 6 5.19e-19       1.97 1     0.563  5.19e-16 1       G901
-```
-
-### VisBatchAlign
-
-``` r
-obj$batch <- sample(c('A','B'), ncol(obj), replace = TRUE)
-
-res <- VisBatchAlign(
-  obj,
-  batch = 'batch',
-  reduction = 'pca',
-  dims = 1:10,
-  k = 20,
-  palette = "C",
-  violin_width = 0.8,
-  violin_alpha = 0.3,
-  box_width = 0.3,
-  box_alpha = 0.5
+# Annotate DEGs with chromosome positions
+res <- anno_deg_chrom(
+  deg_file = deg_file,
+  gff_file = gff_file,
+  format = "auto",
+  id_col = "GeneID",
+  fc_col = "log2FoldChange",
+  use_strand = FALSE,
+  drop_unmapped = TRUE
 )
-
-res$plot
+head(res)
+#>   chrom    start      end   gene_id     score strand
+#> 1 chr14 12802589 12807112 HdF000031  1.408356      *
+#> 2 chr14 12979855 12984114 HdF000041 -1.114777      *
+#> 3 chr14 13092225 13094734 HdF000049  1.271638      *
+#> 4 chr14 13915421 13919063 HdF000066 -6.180426      *
+#> 5 chr14 15038730 15050966 HdF000091 -1.250090      *
+#> 6 chr14 15455652 15456778 HdF000106 -6.085891      *
 ```
 
-![](man/figures/README-VisBatchAlign-1.png)<!-- -->
+### Plot differentially expressed genes (DEGs) hyper/hypo distributions by chromosome
 
 ``` r
-head(res$summary)
-#> # A tibble: 6 × 3
-#>   cell  mix_prop batch
-#>   <chr>    <dbl> <chr>
-#> 1 Cell1     0.5  A    
-#> 2 Cell2     0.6  B    
-#> 3 Cell3     0.45 A    
-#> 4 Cell4     0.6  A    
-#> 5 Cell5     0.5  B    
-#> 6 Cell6     0.55 A
-```
-
-### VisGeneTrend
-
-``` r
-p <- VisGeneTrend(
-  obj,
-  features = c("G10", "G20", "G30"),
-  by = "pseudotime",
-  reduction = "umap",
-  dims = 1:2,
-  smooth.method = "loess",
-  palette = "C",
+# Plot chrom DEGs
+plot_chrom_deg(
+  deg_file = deg_file,
+  gff_file = gff_file,
+  format = "auto",
+  id_col = "GeneID",
+  fc_col = "log2FoldChange",
+  violin_scale = "count",
+  violin_border = 0.5,
+  point_shape = 16,
   point_size = 2,
-  point_alpha = 0.3,
-  smooth_alpha = 0.3,
-  smooth_linewidth = 1.5
+  jitter_width = 0.2,
+  hyper_color = "#ff000088",
+  hypo_color = "#00880088"
 )
-
-p
-#> `geom_smooth()` using formula = 'y ~ x'
 ```
 
-![](man/figures/README-VisGeneTrend-1.png)<!-- -->
+<img src="man/figures/README-plot_chrom_deg-1.png" style="display: block; margin: auto;" />
 
-### VisLigRec
+### Annotate FST slide windows with genomic features
 
 ``` r
-lr <- data.frame(ligand = paste0('G', 1:5), receptor = paste0('G', 6:10))
+# Annotate FST
+fst_table <- system.file(
+    "extdata",
+    "example.fst",
+    package = "GAnnoViz")
 
-res <- VisLigRec(
-  obj,
-  assay = NULL,
-  lr_table = lr,
-  group.by = "seurat_clusters",
-  palette = "C",
-  tile_alpha = 0.8
+fst <- read.table(
+  file = fst_table,
+  header = TRUE,
+  sep = "\t",
+  na.strings = "NA",
+  stringsAsFactors = FALSE
 )
-
-res$plot
+head(fst)
+#>   CHROM BIN_START BIN_END N_VARIANTS WEIGHTED_FST    MEAN_FST
+#> 1 chr11     10001   20000          7   0.04366440  0.02391140
+#> 2 chr11     15001   25000          7   0.04366440  0.02391140
+#> 3 chr11     25001   35000          4   0.01503910  0.01619730
+#> 4 chr11     30001   40000          4   0.01503910  0.01619730
+#> 5 chr11     55001   65000          1  -0.00444874 -0.00444874
+#> 6 chr11     60001   70000          1  -0.00444874 -0.00444874
 ```
 
-![](man/figures/README-VisLigRec-1.png)<!-- -->
-
 ``` r
-head(res$scores)
-#> # A tibble: 6 × 3
-#>   source target score
-#>   <chr>  <chr>  <dbl>
-#> 1 g0     g0      74.8
-#> 2 g0     g1      80.5
-#> 3 g0     g2      74.3
-#> 4 g0     g3      74.0
-#> 5 g0     g4      72.1
-#> 6 g0     g5      71.4
-```
-
-### VisClusterTree
-
-``` r
-p <- VisClusterTree(
-  obj,
-  assay = NULL,
-  group.by = "seurat_clusters",
-  dist.metric = "euclidean",
-  linkage = "complete",
-  show_heatmap = TRUE,
-  palette = "C",
-  tile_alpha = 0.8
+res <- anno_fst_dmr(
+  gff_file = gff_file,
+  format = "auto",
+  genomic_ranges = fst_table,
+  chrom_col = "CHROM",
+  start_col = "BIN_START",
+  end_col = "BIN_END",
+  upstream = 2000,
+  downstream = 200,
+  ignore_strand = TRUE,
+  features = c("promoter", "UTR5", "gene", "exon", "intron", "CDS", "UTR3", "intergenic")
 )
-
-p
+head(res)
+#>   CHROM BIN_START BIN_END N_VARIANTS WEIGHTED_FST    MEAN_FST
+#> 1 chr11     10001   20000          7   0.04366440  0.02391140
+#> 2 chr11     15001   25000          7   0.04366440  0.02391140
+#> 3 chr11     25001   35000          4   0.01503910  0.01619730
+#> 4 chr11     30001   40000          4   0.01503910  0.01619730
+#> 5 chr11     55001   65000          1  -0.00444874 -0.00444874
+#> 6 chr11     60001   70000          1  -0.00444874 -0.00444874
+#>                                 anno_type                   gene_id
+#> 1 promoter,gene,UTR5,CDS,exon,intron,UTR3 HdF041849(p),HdF041849(g)
+#> 2          promoter,gene,UTR5,exon,intron HdF041849(p),HdF041849(g)
+#> 3                              intergenic                          
+#> 4                              intergenic                          
+#> 5                              intergenic                          
+#> 6                              intergenic
 ```
 
-![](man/figures/README-VisClusterTree-1.png)<!-- -->
-
-### VisMetaFeature
+### Annotate DMR slide windows with genomic features
 
 ``` r
-sets <- list(SetA = paste0('G', 1:10), SetB = paste0('G', 11:20))
+# Annotate DMR
+dmr_table <- system.file(
+    "extdata",
+    "example.dmr",
+    package = "GAnnoViz")
 
-res <- VisMetaFeature(
-  obj,
-  feature_sets = sets,
-  group.by = "seurat_clusters",
-  nbin = 24,
-  min.size = 3,
-  palette = "C",
-  violin_width = 0.8,
-  violin_alpha = 0.3,
-  box_width = 0.3,
-  box_alpha = 0.5
+dmr <- read.table(
+  file = dmr_table,
+  header = TRUE,
+  sep = "\t",
+  na.strings = "NA",
+  stringsAsFactors = FALSE
 )
-
-res$plot
+head(dmr)
+#>    chr   start     end strand        pvalue        qvalue meth.diff
+#> 1 chr1  466001  468000      *  4.157118e-03  1.206712e-02 -27.31707
+#> 2 chr1  660001  662000      *  4.041133e-09  3.622605e-08 -33.37925
+#> 3 chr1 1454001 1456000      *  8.939178e-12  1.083862e-10 -26.55631
+#> 4 chr1 2750001 2752000      * 2.716109e-129 5.710428e-127  25.04745
+#> 5 chr1 3428001 3430000      *  2.049072e-10  2.144328e-09 -46.33124
+#> 6 chr1 3604001 3606000      *  2.137854e-09  1.984104e-08  37.85743
 ```
 
-![](man/figures/README-VisMetaFeature-1.png)<!-- -->
-
-### VisCellCycle
-
 ``` r
-genes_s <- paste0('G', 1:10)
-genes_g2m <- paste0('G', 11:20)
-
-res <- VisCellCycle(
-  obj,
-  genes_s,
-  genes_g2m,
-  reduction = "umap",
-  dims = 1:10,
-  palette = "C",
-  alpha = 0.8
+res <- anno_fst_dmr(
+  gff_file = gff_file,
+  format = "auto",
+  genomic_ranges = dmr_table,
+  chrom_col = "chr",
+  start_col = "start",
+  end_col = "end",
+  upstream = 2000,
+  downstream = 200,
+  ignore_strand = TRUE,
+  features = c("promoter", "UTR5", "gene", "exon", "intron", "CDS", "UTR3", "intergenic")
 )
-
-res$plot
+head(res)
+#>    chr   start     end strand        pvalue        qvalue meth.diff
+#> 1 chr1  466001  468000      *  4.157118e-03  1.206712e-02 -27.31707
+#> 2 chr1  660001  662000      *  4.041133e-09  3.622605e-08 -33.37925
+#> 3 chr1 1454001 1456000      *  8.939178e-12  1.083862e-10 -26.55631
+#> 4 chr1 2750001 2752000      * 2.716109e-129 5.710428e-127  25.04745
+#> 5 chr1 3428001 3430000      *  2.049072e-10  2.144328e-09 -46.33124
+#> 6 chr1 3604001 3606000      *  2.137854e-09  1.984104e-08  37.85743
+#>        anno_type      gene_id
+#> 1    gene,intron HdF051575(g)
+#> 2    gene,intron HdF051575(g)
+#> 3 gene,exon,UTR3 HdF027216(g)
+#> 4     intergenic             
+#> 5    gene,intron HdF027234(g)
+#> 6    gene,intron HdF027242(g)
 ```
 
-![](man/figures/README-unnamed-chunk-2-1.png)<!-- -->
-
-### VisEmbeddingContour
+### Plot SNP density at chromosome level
 
 ``` r
-p <- VisEmbeddingContour(
-  obj,
-  group.by = "seurat_clusters",
-  reduction = "umap",
-  levels = 5,
-  palette = "C",
-  point_size = 1,
-  point_alpha = 0.5,
-  contour_alpha = 0.1
+# Plot SNP density
+plot_chrom_snp(
+  fst_file = fst_table,
+  LOG10 = FALSE,
+  bin_size = 1e6,
+  density_color = c("#0088ff", "#ff8800", "#ff0000")
 )
-
-p
 ```
 
-![](man/figures/README-VisEmbeddingContour-1.png)<!-- -->
+<img src="man/figures/README-plot_chrom_snp-1.png" style="display: block; margin: auto;" />
 
-### VisGeneCoexpHive
-
-``` r
-p <- VisGeneCoexpHive(
-  obj,
-  genes = paste0("G", 1:100),
-  reduction = "pca",
-  threshold = 0.2,
-  palette = "C",
-  point_size = 3,
-  point_alpha = 0.8,
-  label_size = 3,
-  curve_alpha = 0.5
-)
-#> Warning: The `slot` argument of `GetAssayData()` is deprecated as of SeuratObject 5.0.0.
-#> ℹ Please use the `layer` argument instead.
-#> ℹ The deprecated feature was likely used in the SeuratVisPro package.
-#>   Please report the issue at
-#>   <https://github.com/benben-miao/SeuratVisPro/issues>.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
-#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
-#> ℹ Please use `linewidth` instead.
-#> ℹ The deprecated feature was likely used in the SeuratVisPro package.
-#>   Please report the issue at
-#>   <https://github.com/benben-miao/SeuratVisPro/issues>.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
-
-p
-```
-
-![](man/figures/README-VisGeneCoexpHive-1.png)<!-- -->
-
-### VisSpatialOverlay
+### Plot differentially methylated regions (DMRs) hyper/hypo distributions by chromosome
 
 ``` r
-obj_sp <- SeuratVisProExample(n_cells = 300, n_genes = 1000, n_clusters = 10, spatial = TRUE)
-#> Modularity Optimizer version 1.3.0 by Ludo Waltman and Nees Jan van Eck
-#> 
-#> Number of nodes: 300
-#> Number of edges: 4508
-#> 
-#> Running Louvain algorithm...
-#> Maximum modularity in 10 random starts: 0.9485
-#> Number of communities: 10
-#> Elapsed time: 0 seconds
-
-p <- VisSpatialOverlay(
-  obj_sp,
-  features = c("G1", "G2", "G3", "G4"),
-  image = NULL,
-  coords_cols = c("x", "y"),
-  palette = "C",
+# Plot chrom DMRs
+plot_chrom_dmr(
+  dmr_file = dmr_table,
+  violin_scale = "count",
+  violin_border = 0.5,
+  point_shape = 8,
   point_size = 2,
-  alpha = 0.5
+  jitter_width = 0.2,
+  hyper_color = "#ff880088",
+  hypo_color = "#0088ff88"
 )
-
-p
 ```
 
-![](man/figures/README-VisSpatialOverlay-1.png)<!-- -->
-
-### VisHexEntropy
-
-``` r
-p <- VisHexEntropy(
-  obj,
-  group.by = "seurat_clusters",
-  reduction = "umap",
-  bins = 30,
-  palette = "C"
-)
-
-p
-```
-
-![](man/figures/README-VisHexEntropy-1.png)<!-- -->
-
-### VisLocalMoran
-
-``` r
-p <- VisLocalMoran(
-  obj,
-  gene = 'G10',
-  reduction = "umap",
-  k = 15,
-  palette = "C",
-  point_size = 2,
-  point_alpha = 0.8
-)
-
-p
-```
-
-![](man/figures/README-unnamed-chunk-3-1.png)<!-- -->
-
-### VisClusterFlowGraph
-
-``` r
-p <- VisClusterFlowGraph(
-  obj,
-  group.by = "seurat_clusters",
-  reduction = "umap",
-  palette = "C",
-  point_size = 7,
-  point_alpha = 0.9,
-  label_size = 5
-)
-
-p
-```
-
-![](man/figures/README-unnamed-chunk-4-1.png)<!-- -->
+<img src="man/figures/README-plot_chrom_dmr-1.png" style="display: block; margin: auto;" />

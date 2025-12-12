@@ -1,335 +1,377 @@
 ---
-title: "SeuratVisPro"
+title: "GAnnoViz"
 output:
   github_document:
     toc: true
     toc_depth: 2
 ---
 
-```{r setup, echo = FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  warning = FALSE,
+  message = FALSE,
   fig.path = "man/figures/README-",
-  fig.width = 10.00,
-  fig.height = 6.18,
+  fig.align = "center",
   dpi = 120
 )
 ```
 
-# SeuratVisPro
+# GAnnoViz
 
 ## 1. Introduction
 
-**SourceCode:** <https://github.com/benben-miao/SeuratVisPro/>
+**SourceCode:** <https://github.com/benben-miao/GAnnoViz/>
 
-**Website API**: <https://benben-miao.github.io/SeuratVisPro/>
+**Website API**: <https://benben-miao.github.io/GAnnoViz/>
 
-SeuratVisPro is an innovative visualization and diagnostic toolkit for Seurat v5. It provides cluster stability assessment, batch mixing diagnostics, marker atlas visualization, ligand–receptor directional scoring, gene trend plotting, dendrograms with similarity heatmaps, spatial overlays with non-spatial fallbacks, module score visualization, cell cycle views, and more. An optional bs4Dash Shiny app is bundled for interactive exploration.
+GAnnoViz: a R package for genomic annotation and visualization.
 
 ## 2. Installation
 
-```{r}
+```{r echo=FALSE}
 # From GitHub
 # install.packages("remotes")
-# remotes::install_github("benben-miao/SeuratVisPro")
+# remotes::install_github("benben-miao/GAnnoViz")
 
-library(SeuratVisPro)
-library(Seurat)
+library(GAnnoViz)
 library(ggplot2)
 ```
 
 ## 3. Shiny App
 
-```r
-launchSeuratVisPro()
+```{r eval=FALSE}
+# GAnnoVizApp()
 ```
 
 ## 4. Usages
 
-### Example Data
+### Extract Genes
 
-```{r SeuratVisProExample}
-obj <- SeuratVisProExample(
-  n_cells = 300,
-  n_genes = 1000,
-  n_clusters = 10,
-  seed = 123,
-  genes_mt = "^MT-",
-  neighbor_dims = 10,
-  cluster_res = 0.5,
-  umap_dims = 10,
-  spatial = FALSE
-)
+```{r extract_genes}
+# Example GFF3 file in GAnnoViz
+gff_file <- system.file(
+  "extdata",
+  "example.gff",
+  package = "GAnnoViz")
 
-Seurat::DimPlot(obj, group.by = "cluster")
+# Extract Genes
+# genes <- extract_genes(
+#   gff_file = gff_file,
+#   format = "auto",
+#   gene_info = "all")
+# genes
+
+# Gene info: gene_range
+gene_range <- extract_genes(
+  gff_file = gff_file,
+  format = "auto",
+  gene_info = "gene_range")
+head(gene_range)
 ```
 
-### VisQCPanel
+### Extract CDS
 
-```{r VisQCPanel}
-p <- VisQCPanel(
-  obj,
-  assay = NULL,
-  genes_mt = "^MT-",
-  genes_ribo = "^RPL|^RPS",
-  group.by = "seurat_clusters",
-  interactive = FALSE,
-  palette = "C",
-  violin_width = 0.8,
-  violin_alpha = 0.3,
-  box_width = 0.3,
-  box_alpha = 0.5
-)
+```{r extract_cds}
+# Extract CDS
+# cds <- extract_cds(
+#   gff_file = gff_file,
+#   format = "auto",
+#   cds_info = "all")
+# cds
 
-p
+# CDS info: cds_range
+cds_range <- extract_cds(
+  gff_file = gff_file,
+  format = "auto",
+  cds_info = "cds_range")
+head(cds_range)
 ```
 
-### VisClusterStability
+### Extract Promoters
 
-```{r VisClusterStability}
-res <- VisClusterStability(
-  obj,
-  resolution_range = seq(0.2, 1.2, by = 0.2),
-  dims = 1:10,
-  reps = 5,
-  prop = 0.8,
-  palette = "C"
-)
+```{r extract_promoters}
+# Extract Promoters
+# promoters <- extract_promoters(
+#   gff_file = gff_file,
+#   format = "auto",
+#   upstream = 2000,
+#   downstream = 200,
+#   promoter_info = "all")
+# promoters
 
-res$plot
-head(res$summary)
+# Promoter info: promoter_range
+promoter_range <- extract_promoters(
+  gff_file = gff_file,
+  format = "auto",
+  upstream = 2000,
+  downstream = 200,
+  promoter_info = "promoter_range")
+head(promoter_range)
 ```
 
-### VisMarkerAtlas
+### Extract 5'UTR
 
-```{r VisMarkerAtlas}
-res <- VisMarkerAtlas(
-  obj,
-  markers_top = 5,
-  logfc_threshold = 0.25,
-  min_percent = 0.1,
-  test_method = "wilcox",
-  palette = "C"
-)
+```{r extract_utr5}
+# Extract 5'UTR
+# utr5 <- extract_utr5(
+#   gff_file = gff_file,
+#   format = "auto",
+#   utr5_info = "all")
+# utr5
 
-res$plot
-head(res$markers)
+# 5'UTR info: utr5_range
+utr5_range <- extract_utr5(
+  gff_file = gff_file,
+  format = "auto",
+  utr5_info = "utr5_range")
+head(utr5_range)
 ```
 
-### VisBatchAlign
+### Plot gene stats for chromosomes
 
-```{r VisBatchAlign}
-obj$batch <- sample(c('A','B'), ncol(obj), replace = TRUE)
-
-res <- VisBatchAlign(
-  obj,
-  batch = 'batch',
-  reduction = 'pca',
-  dims = 1:10,
-  k = 20,
-  palette = "C",
-  violin_width = 0.8,
-  violin_alpha = 0.3,
-  box_width = 0.3,
-  box_alpha = 0.5
-)
-
-res$plot
-head(res$summary)
+```{r plot_gene_stats, fig.width=10, fig.height=7}
+# Plot gene stats
+plot_gene_stats(
+    gff_file = gff_file,
+    format = "auto",
+    bar_width = 0.7,
+    bar_color = "#0055ff55",
+    lable_size = 3)
 ```
 
-### VisGeneTrend
+### Plot gene structure (Promoter, 3'UTR, Exon, Intron, 5'UTR)
 
-```{r VisGeneTrend}
-p <- VisGeneTrend(
-  obj,
-  features = c("G10", "G20", "G30"),
-  by = "pseudotime",
-  reduction = "umap",
-  dims = 1:2,
-  smooth.method = "loess",
-  palette = "C",
-  point_size = 2,
-  point_alpha = 0.3,
-  smooth_alpha = 0.3,
-  smooth_linewidth = 1.5
+```{r plot_gene_structure, fig.width=10, fig.height=2}
+# Plot gene structure
+plot_gene_structure(
+  gff_file = gff_file,
+  format = "auto",
+  gene_id = "HdF029609",
+  upstream = 2000,
+  downstream = 200,
+  feature_alpha = 0.8,
+  intron_width = 1,
+  x_breaks = 10,
+  arrow_length = 5,
+  arrow_count = 1,
+  arrow_unit = "pt",
+  promoter_color = "#ff8800",
+  utr5_color = "#008833",
+  utr3_color = "#ff0033",
+  exon_color = "#0033ff",
+  intron_color = "#333333"
 )
-
-p
 ```
 
-### VisLigRec
+### Plot gene structures for a genomic interval
 
-```{r VisLigRec}
-lr <- data.frame(ligand = paste0('G', 1:5), receptor = paste0('G', 6:10))
-
-res <- VisLigRec(
-  obj,
-  assay = NULL,
-  lr_table = lr,
-  group.by = "seurat_clusters",
-  palette = "C",
-  tile_alpha = 0.8
+```{r plot_interval_structure, fig.width=10, fig.height=5}
+# Plot interval structure
+plot_interval_structure(
+  gff_file = gff_file,
+  format = "auto",
+  chrom_id = "chr1",
+  start = 950000,
+  end = 1180000,
+  x_breaks = 10,
+  upstream = 2000,
+  downstream = 200,
+  feature_alpha = 0.8,
+  intron_width = 1,
+  arrow_count = 1,
+  arrow_length = 5,
+  arrow_unit = "pt",
+  promoter_color = "#ff8800",
+  utr5_color = "#008833",
+  utr3_color = "#ff0033",
+  exon_color = "#0033ff",
+  intron_color = "#333333"
 )
-
-res$plot
-head(res$scores)
 ```
 
-### VisClusterTree
+### Plot chromosome structures and gene stats
 
-```{r VisClusterTree}
-p <- VisClusterTree(
-  obj,
-  assay = NULL,
-  group.by = "seurat_clusters",
-  dist.metric = "euclidean",
-  linkage = "complete",
-  show_heatmap = TRUE,
-  palette = "C",
-  tile_alpha = 0.8
+```{r plot_chrom_structure, fig.width=10, fig.height=7}
+# Plot chrom structure
+plot_chrom_structure(
+  gff_file = gff_file,
+  format = "auto",
+  orientation = "vertical",
+  bar_width = 0.6,
+  chrom_alpha = 0.1,
+  gene_width = 0.5,
+  chrom_color = "#008888",
+  gene_color = "#0088ff",
+  telomere_color = "#ff0000",
+  label_size = 3
 )
-
-p
 ```
 
-### VisMetaFeature
+### Plot chromosome structures and gene annotation
 
-```{r VisMetaFeature}
-sets <- list(SetA = paste0('G', 1:10), SetB = paste0('G', 11:20))
+```{r plot_chrom_genes, fig.width=10, fig.height=7}
+genes <- data.frame(
+  gene_id = c("HdF029609", "HdF029610"),
+  gene_name = c("GeneA", "GeneB"))
 
-res <- VisMetaFeature(
-  obj,
-  feature_sets = sets,
-  group.by = "seurat_clusters",
-  nbin = 24,
-  min.size = 3,
-  palette = "C",
-  violin_width = 0.8,
-  violin_alpha = 0.3,
-  box_width = 0.3,
-  box_alpha = 0.5
-)
-
-res$plot
+# Vertical, annotate by name
+plot_chrom_genes(
+  gff_file = gff_file,
+  gene_table = genes,
+  annotate = "name",
+  orientation = "vertical")
 ```
 
-### VisCellCycle
+
+### Annotate differentially expressed genes (DEGs) with chromosome positions
 
 ```{r}
-genes_s <- paste0('G', 1:10)
-genes_g2m <- paste0('G', 11:20)
+# Example DEGs GAnnoViz
+deg_file <- system.file(
+  "extdata",
+  "example.deg",
+  package = "GAnnoViz")
 
-res <- VisCellCycle(
-  obj,
-  genes_s,
-  genes_g2m,
-  reduction = "umap",
-  dims = 1:10,
-  palette = "C",
-  alpha = 0.8
+deg <- read.table(
+  file = deg_file,
+  header = TRUE,
+  sep = "\t",
+  na.strings = NA,
+  stringsAsFactors = FALSE
 )
-
-res$plot
+head(deg)
 ```
 
-### VisEmbeddingContour
-
-```{r VisEmbeddingContour}
-p <- VisEmbeddingContour(
-  obj,
-  group.by = "seurat_clusters",
-  reduction = "umap",
-  levels = 5,
-  palette = "C",
-  point_size = 1,
-  point_alpha = 0.5,
-  contour_alpha = 0.1
+```{r anno_deg_chrom}
+# Annotate DEGs with chromosome positions
+res <- anno_deg_chrom(
+  deg_file = deg_file,
+  gff_file = gff_file,
+  format = "auto",
+  id_col = "GeneID",
+  fc_col = "log2FoldChange",
+  use_strand = FALSE,
+  drop_unmapped = TRUE
 )
-
-p
+head(res)
 ```
 
-### VisGeneCoexpHive
+### Plot differentially expressed genes (DEGs) hyper/hypo distributions by chromosome
 
-```{r VisGeneCoexpHive}
-p <- VisGeneCoexpHive(
-  obj,
-  genes = paste0("G", 1:100),
-  reduction = "pca",
-  threshold = 0.2,
-  palette = "C",
-  point_size = 3,
-  point_alpha = 0.8,
-  label_size = 3,
-  curve_alpha = 0.5
-)
-
-p
-```
-
-### VisSpatialOverlay
-
-```{r VisSpatialOverlay}
-obj_sp <- SeuratVisProExample(n_cells = 300, n_genes = 1000, n_clusters = 10, spatial = TRUE)
-
-p <- VisSpatialOverlay(
-  obj_sp,
-  features = c("G1", "G2", "G3", "G4"),
-  image = NULL,
-  coords_cols = c("x", "y"),
-  palette = "C",
+```{r plot_chrom_deg, fig.width=10, fig.height=7}
+# Plot chrom DEGs
+plot_chrom_deg(
+  deg_file = deg_file,
+  gff_file = gff_file,
+  format = "auto",
+  id_col = "GeneID",
+  fc_col = "log2FoldChange",
+  violin_scale = "count",
+  violin_border = 0.5,
+  point_shape = 16,
   point_size = 2,
-  alpha = 0.5
+  jitter_width = 0.2,
+  hyper_color = "#ff000088",
+  hypo_color = "#00880088"
 )
-
-p
 ```
 
-### VisHexEntropy
-
-```{r VisHexEntropy}
-p <- VisHexEntropy(
-  obj,
-  group.by = "seurat_clusters",
-  reduction = "umap",
-  bins = 30,
-  palette = "C"
-)
-
-p
-```
-
-### VisLocalMoran
+### Annotate FST slide windows with genomic features
 
 ```{r}
-p <- VisLocalMoran(
-  obj,
-  gene = 'G10',
-  reduction = "umap",
-  k = 15,
-  palette = "C",
-  point_size = 2,
-  point_alpha = 0.8
-)
+# Annotate FST
+fst_table <- system.file(
+    "extdata",
+    "example.fst",
+    package = "GAnnoViz")
 
-p
+fst <- read.table(
+  file = fst_table,
+  header = TRUE,
+  sep = "\t",
+  na.strings = "NA",
+  stringsAsFactors = FALSE
+)
+head(fst)
 ```
 
-### VisClusterFlowGraph
+```{r anno_fst}
+res <- anno_fst_dmr(
+  gff_file = gff_file,
+  format = "auto",
+  genomic_ranges = fst_table,
+  chrom_col = "CHROM",
+  start_col = "BIN_START",
+  end_col = "BIN_END",
+  upstream = 2000,
+  downstream = 200,
+  ignore_strand = TRUE,
+  features = c("promoter", "UTR5", "gene", "exon", "intron", "CDS", "UTR3", "intergenic")
+)
+head(res)
+```
+
+### Annotate DMR slide windows with genomic features
 
 ```{r}
-p <- VisClusterFlowGraph(
-  obj,
-  group.by = "seurat_clusters",
-  reduction = "umap",
-  palette = "C",
-  point_size = 7,
-  point_alpha = 0.9,
-  label_size = 5
-)
+# Annotate DMR
+dmr_table <- system.file(
+    "extdata",
+    "example.dmr",
+    package = "GAnnoViz")
 
-p
+dmr <- read.table(
+  file = dmr_table,
+  header = TRUE,
+  sep = "\t",
+  na.strings = "NA",
+  stringsAsFactors = FALSE
+)
+head(dmr)
 ```
 
+```{r anno_dmr}
+res <- anno_fst_dmr(
+  gff_file = gff_file,
+  format = "auto",
+  genomic_ranges = dmr_table,
+  chrom_col = "chr",
+  start_col = "start",
+  end_col = "end",
+  upstream = 2000,
+  downstream = 200,
+  ignore_strand = TRUE,
+  features = c("promoter", "UTR5", "gene", "exon", "intron", "CDS", "UTR3", "intergenic")
+)
+head(res)
+```
+
+### Plot SNP density at chromosome level
+
+```{r plot_chrom_snp, fig.width=10, fig.height=7}
+# Plot SNP density
+plot_chrom_snp(
+  fst_file = fst_table,
+  LOG10 = FALSE,
+  bin_size = 1e6,
+  density_color = c("#0088ff", "#ff8800", "#ff0000")
+)
+```
+
+### Plot differentially methylated regions (DMRs) hyper/hypo distributions by chromosome
+
+```{r plot_chrom_dmr, fig.width=10, fig.height=7}
+# Plot chrom DMRs
+plot_chrom_dmr(
+  dmr_file = dmr_table,
+  violin_scale = "count",
+  violin_border = 0.5,
+  point_shape = 8,
+  point_size = 2,
+  jitter_width = 0.2,
+  hyper_color = "#ff880088",
+  hypo_color = "#0088ff88"
+)
+```
