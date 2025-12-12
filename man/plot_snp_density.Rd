@@ -27,11 +27,11 @@ Plot SNP density at chromosome level.
 Plot \bold{\emph{SNP density}} at chromosome level.
 }
 \examples{
-# Example data in SlideAnno
+# Example data in GAnnoViz
 fst_file <- system.file(
   "extdata",
   "example.fst",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 # Plot SNP density
 plot_snp_density(

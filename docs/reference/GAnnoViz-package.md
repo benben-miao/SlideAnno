@@ -1,7 +1,7 @@
-# SlideAnno: Sliding Window Annotation for Genomic Data
+# GAnnoViz: Genomic Annotation and Visualization
 
-The SlideAnno package provides tools for genomic annotation using
-sliding windows and GFF/GTF parsing.
+The GAnnoViz package provides tools for genomic annotation using sliding
+windows and GFF/GTF parsing.
 
 ## Main Functions
 

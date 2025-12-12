@@ -59,11 +59,11 @@ A ***ggplot object*** of chromosome-wise DMR distributions.
 ## Examples
 
 ``` r
-# DMR restuls from Methylkit
+# DMR results from Methylkit
 dmr_file <- system.file(
     "extdata",
     "example.dmr",
-    package = "SlideAnno")
+    package = "GAnnoViz")
 
 # Plot
 plot_dmg_chrom(
@@ -76,6 +76,5 @@ plot_dmg_chrom(
   hyper_color = "#ff880088",
   hypo_color = "#0088ff88"
 )
-#> Warning: file("") only supports open = "w+" and open = "w+b": using the former
-#> Error in utils::read.table(dmr_file, header = TRUE, sep = "\t", stringsAsFactors = FALSE,     check.names = FALSE): no lines available in input
+
 ```

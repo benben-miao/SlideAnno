@@ -39,11 +39,11 @@ A \bold{\emph{ggplot object}} of chromosome-wise DMR distributions.
 Plot \bold{\emph{differentially methylated regions (DMRs)}} hyper/hypo distributions by chromosome.
 }
 \examples{
-# DMR restuls from Methylkit
+# DMR results from Methylkit
 dmr_file <- system.file(
     "extdata",
     "example.dmr",
-    package = "SlideAnno")
+    package = "GAnnoViz")
 
 # Plot
 plot_dmg_chrom(

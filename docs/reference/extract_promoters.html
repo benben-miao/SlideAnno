@@ -87,11 +87,11 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example GFF3 file in SlideAnno</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example GFF3 file in GAnnoViz</span></span></span>
 <span class="r-in"><span><span class="va">gff_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"extdata"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"example.gff"</span>,</span></span>
-<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"SlideAnno"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"GAnnoViz"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extract Promoters</span></span></span>
 <span class="r-in"><span><span class="va">promoters</span> <span class="op">&lt;-</span> <span class="fu">extract_promoters</span><span class="op">(</span></span></span>
@@ -100,10 +100,29 @@
 <span class="r-in"><span>  upstream <span class="op">=</span> <span class="fl">2000</span>,</span></span>
 <span class="r-in"><span>  downstream <span class="op">=</span> <span class="fl">200</span>,</span></span>
 <span class="r-in"><span>  promoter_info <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format):</span> Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   argument to specify the format ("gff3" or "gtf").</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Import genomic features from the file as a GRanges object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Prepare the 'metadata' data frame ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Make the TxDb object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
 <span class="r-in"><span><span class="va">promoters</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'promoters' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 28263 ranges and 2 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     seqnames          ranges strand |     tx_id         tx_name</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                        &lt;Rle&gt;       &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;     &lt;character&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     nbis-mrna-126       chr1   807987-810186      + |         1   nbis-mrna-126</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     nbis-mrna-127       chr1   882426-884625      + |         2   nbis-mrna-127</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     nbis-mrna-129       chr1   949197-951396      + |         3   nbis-mrna-129</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     nbis-mrna-130       chr1 1058746-1060945      + |         4   nbis-mrna-130</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     nbis-mrna-132       chr1 1184302-1186501      + |         5   nbis-mrna-132</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               ...        ...             ...    ... .       ...             ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-11014 superscaf8   224875-227074      + |     28259 nbis-mrna-11014</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-11016 superscaf8   308498-310697      + |     28260 nbis-mrna-11016</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-11018 superscaf8   365010-367209      + |     28261 nbis-mrna-11018</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-11015 superscaf8   246523-248722      - |     28262 nbis-mrna-11015</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-11017 superscaf8   356750-358949      - |     28263 nbis-mrna-11017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 89 sequences from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Promoter info: promoter_id</span></span></span>
 <span class="r-in"><span><span class="va">promoter_id</span> <span class="op">&lt;-</span> <span class="fu">extract_promoters</span><span class="op">(</span></span></span>
@@ -112,10 +131,15 @@
 <span class="r-in"><span>  upstream <span class="op">=</span> <span class="fl">2000</span>,</span></span>
 <span class="r-in"><span>  downstream <span class="op">=</span> <span class="fl">200</span>,</span></span>
 <span class="r-in"><span>  promoter_info <span class="op">=</span> <span class="st">"promoter_id"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format):</span> Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   argument to specify the format ("gff3" or "gtf").</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Import genomic features from the file as a GRanges object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Prepare the 'metadata' data frame ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Make the TxDb object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">promoter_id</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'promoter_id' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "nbis-mrna-126" "nbis-mrna-127" "nbis-mrna-129" "nbis-mrna-130"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [5] "nbis-mrna-132" "nbis-mrna-134"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Promoter info: promoter_range</span></span></span>
 <span class="r-in"><span><span class="va">promoter_range</span> <span class="op">&lt;-</span> <span class="fu">extract_promoters</span><span class="op">(</span></span></span>
@@ -124,10 +148,22 @@
 <span class="r-in"><span>  upstream <span class="op">=</span> <span class="fl">2000</span>,</span></span>
 <span class="r-in"><span>  downstream <span class="op">=</span> <span class="fl">200</span>,</span></span>
 <span class="r-in"><span>  promoter_info <span class="op">=</span> <span class="st">"promoter_range"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format):</span> Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   argument to specify the format ("gff3" or "gtf").</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Import genomic features from the file as a GRanges object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Prepare the 'metadata' data frame ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Make the TxDb object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">promoter_range</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'promoter_range' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IRanges object with 6 ranges and 0 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     start       end     width</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-126    807987    810186      2200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-127    882426    884625      2200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-129    949197    951396      2200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-130   1058746   1060945      2200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-132   1184302   1186501      2200</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   nbis-mrna-134   1259096   1261295      2200</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

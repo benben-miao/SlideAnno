@@ -83,13 +83,13 @@ A ***ggplot object*** of chromosome-wise DEG distributions.
 deg_file <- system.file(
     "extdata",
     "example.deg",
-    package = "SlideAnno")
+    package = "GAnnoViz")
 
 # Genomic structure annotation
 gff_file <- system.file(
     "extdata",
     "example.gff",
-    package = "SlideAnno")
+    package = "GAnnoViz")
 
 # Plot
 plot_chrom_deg(
@@ -106,6 +106,11 @@ plot_chrom_deg(
   hyper_color = "#ff000088",
   hypo_color = "#00880088"
 )
-#> Warning: file("") only supports open = "w+" and open = "w+b": using the former
-#> Error in utils::read.table(deg_file, header = TRUE, sep = "\t", fill = TRUE,     na.strings = "NA", stringsAsFactors = FALSE, check.names = FALSE): no lines available in input
+#> Import genomic features from the file as a GRanges object ... 
+#> OK
+#> Prepare the 'metadata' data frame ... 
+#> OK
+#> Make the TxDb object ... 
+#> OK
+
 ```

@@ -68,11 +68,11 @@ Plot of chromosome structure.
 ## Examples
 
 ``` r
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 plot_chrom_structure(
   gff_file = gff_file,
@@ -86,6 +86,11 @@ plot_chrom_structure(
   telomere_color = "#ff0000",
   label_size = 3
 )
-#> Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format): Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'
-#>   argument to specify the format ("gff3" or "gtf").
+#> Import genomic features from the file as a GRanges object ... 
+#> OK
+#> Prepare the 'metadata' data frame ... 
+#> OK
+#> Make the TxDb object ... 
+#> OK
+
 ```

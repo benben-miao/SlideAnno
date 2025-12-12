@@ -73,31 +73,62 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example GFF3 file in SlideAnno</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example GFF3 file in GAnnoViz</span></span></span>
 <span class="r-in"><span><span class="va">gff_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"extdata"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"example.gff"</span>,</span></span>
-<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"SlideAnno"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"GAnnoViz"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Extract CDS</span></span></span>
 <span class="r-in"><span><span class="va">cds</span> <span class="op">&lt;-</span> <span class="fu">extract_cds</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span></span>
 <span class="r-in"><span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span></span>
 <span class="r-in"><span>  cds_info <span class="op">=</span> <span class="st">"all"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format):</span> Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   argument to specify the format ("gff3" or "gtf").</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Import genomic features from the file as a GRanges object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Prepare the 'metadata' data frame ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Make the TxDb object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
 <span class="r-in"><span><span class="va">cds</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'cds' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> GRanges object with 174657 ranges and 1 metadata column:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              seqnames        ranges strand |    cds_id</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                 &lt;Rle&gt;     &lt;IRanges&gt;  &lt;Rle&gt; | &lt;integer&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        [1]       chr1 810081-810090      + |         1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        [2]       chr1 816466-816734      + |         2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        [3]       chr1 818765-818971      + |         3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        [4]       chr1 819680-819740      + |         4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        [5]       chr1 821042-821214      + |         5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        ...        ...           ...    ... .       ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [174653] superscaf8 374132-374321      + |    174653</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [174654] superscaf8 375441-375559      + |    174654</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [174655] superscaf8 377150-377320      + |    174655</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [174656] superscaf8 246044-246595      - |    174656</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [174657] superscaf8 356310-356849      - |    174657</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   -------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   seqinfo: 89 sequences from an unspecified genome; no seqlengths</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># CDS info: cds_range</span></span></span>
 <span class="r-in"><span><span class="va">cds_range</span> <span class="op">&lt;-</span> <span class="fu">extract_cds</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span></span>
 <span class="r-in"><span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span></span>
 <span class="r-in"><span>  cds_info <span class="op">=</span> <span class="st">"cds_range"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format):</span> Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   argument to specify the format ("gff3" or "gtf").</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Import genomic features from the file as a GRanges object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Prepare the 'metadata' data frame ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Make the TxDb object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">cds_range</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'cds_range' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> IRanges object with 6 ranges and 0 metadata columns:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           start       end     width</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]    810081    810090        10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [2]    816466    816734       269</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [3]    818765    818971       207</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [4]    819680    819740        61</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [5]    821042    821214       173</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [6]    825267    825329        63</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

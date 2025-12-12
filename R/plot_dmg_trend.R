@@ -41,6 +41,7 @@ plot_dmg_trend <- function(chrom_id,
     dmr_file,
     header = TRUE,
     sep = "\t",
+    fill = TRUE,
     na.strings = "NA",
     stringsAsFactors = FALSE
   )

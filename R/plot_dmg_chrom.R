@@ -42,13 +42,14 @@ plot_dmg_chrom <- function(dmr_file,
 						   hyper_color = "#ff880088",
 						   hypo_color = "#0088ff88") {
 	# DMR results
-	dmr <- utils::read.table(
-		dmr_file,
-		header = TRUE,
-		sep = "\t",
-		stringsAsFactors = FALSE,
-		check.names = FALSE
-	)
+  dmr <- utils::read.table(
+    dmr_file,
+    header = TRUE,
+    sep = "\t",
+    fill = TRUE,
+    stringsAsFactors = FALSE,
+    check.names = FALSE
+  )
 
 	# Chrom
 	chrom_raw <- as.character(dmr$chr)

@@ -122,13 +122,13 @@
 <span class="r-in"><span><span class="va">deg_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="st">"extdata"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"example.deg"</span>,</span></span>
-<span class="r-in"><span>    package <span class="op">=</span> <span class="st">"SlideAnno"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    package <span class="op">=</span> <span class="st">"GAnnoViz"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Genomic structure annotation</span></span></span>
 <span class="r-in"><span><span class="va">gff_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="st">"extdata"</span>,</span></span>
 <span class="r-in"><span>    <span class="st">"example.gff"</span>,</span></span>
-<span class="r-in"><span>    package <span class="op">=</span> <span class="st">"SlideAnno"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    package <span class="op">=</span> <span class="st">"GAnnoViz"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Plot</span></span></span>
 <span class="r-in"><span><span class="fu">plot_chrom_deg</span><span class="op">(</span></span></span>
@@ -145,8 +145,13 @@
 <span class="r-in"><span>  hyper_color <span class="op">=</span> <span class="st">"#ff000088"</span>,</span></span>
 <span class="r-in"><span>  hypo_color <span class="op">=</span> <span class="st">"#00880088"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>file("") only supports open = "w+" and open = "w+b": using the former</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in utils::read.table(deg_file, header = TRUE, sep = "\t", fill = TRUE,     na.strings = "NA", stringsAsFactors = FALSE, check.names = FALSE):</span> no lines available in input</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Import genomic features from the file as a GRanges object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Prepare the 'metadata' data frame ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Make the TxDb object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-plt img"><img src="plot_chrom_deg-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

@@ -93,16 +93,16 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example DEGs and GFF in SlideAnno</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example DEGs and GFF in GAnnoViz</span></span></span>
 <span class="r-in"><span><span class="va">deg_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"extdata"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"example.deg"</span>,</span></span>
-<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"SlideAnno"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"GAnnoViz"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">gff_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"extdata"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"example.gff"</span>,</span></span>
-<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"SlideAnno"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"GAnnoViz"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Annotate DEGs with chromosome positions</span></span></span>
 <span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">anno_deg_chrom</span><span class="op">(</span></span></span>
@@ -114,10 +114,20 @@
 <span class="r-in"><span>  use_strand <span class="op">=</span> <span class="cn">FALSE</span>,</span></span>
 <span class="r-in"><span>  drop_unmapped <span class="op">=</span> <span class="cn">TRUE</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>file("") only supports open = "w+" and open = "w+b": using the former</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in utils::read.table(deg_file, header = TRUE, sep = "\t", fill = TRUE,     na.strings = "NA", stringsAsFactors = FALSE, check.names = FALSE):</span> no lines available in input</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Import genomic features from the file as a GRanges object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Prepare the 'metadata' data frame ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Make the TxDb object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'res' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   chrom    start      end   gene_id     score strand</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 chr14 12802589 12807112 HdF000031  1.408356      *</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2 chr14 12979855 12984114 HdF000041 -1.114777      *</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3 chr14 13092225 13094734 HdF000049  1.271638      *</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4 chr14 13915421 13919063 HdF000066 -6.180426      *</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5 chr14 15038730 15050966 HdF000091 -1.250090      *</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6 chr14 15455652 15456778 HdF000106 -6.085891      *</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

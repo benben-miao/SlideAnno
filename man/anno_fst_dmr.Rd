@@ -45,17 +45,17 @@ Data.frame with input intervals and \bold{\emph{annotation results}}.
 Annotate \bold{\emph{FST/DMR}} slide windows with \bold{\emph{genomic features}}.
 }
 \examples{
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 # Annotate FST
 fst_table <- system.file(
     "extdata",
     "example.fst",
-    package = "SlideAnno")
+    package = "GAnnoViz")
 
 res <- anno_fst_dmr(
   gff_file = gff_file,
@@ -75,7 +75,7 @@ head(res)
 dmr_table <- system.file(
     "extdata",
     "example.dmr",
-    package = "SlideAnno")
+    package = "GAnnoViz")
 
 res <- anno_fst_dmr(
   gff_file = gff_file,

@@ -102,11 +102,11 @@ benben-miao
 ## Examples
 
 ``` r
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 # Plot gene structure
 plot_gene_structure(
@@ -127,6 +127,11 @@ plot_gene_structure(
   exon_color = "#0033ff",
   intron_color = "#333333"
 )
-#> Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format): Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'
-#>   argument to specify the format ("gff3" or "gtf").
+#> Import genomic features from the file as a GRanges object ... 
+#> OK
+#> Prepare the 'metadata' data frame ... 
+#> OK
+#> Make the TxDb object ... 
+#> OK
+
 ```

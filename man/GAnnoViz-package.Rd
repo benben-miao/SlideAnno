@@ -4,9 +4,9 @@
 \name{GAnnoViz-package}
 \alias{GAnnoViz}
 \alias{GAnnoViz-package}
-\title{SlideAnno: Sliding Window Annotation for Genomic Data}
+\title{GAnnoViz: Genomic Annotation and Visualization}
 \description{
-The \pkg{SlideAnno} package provides tools for genomic annotation using
+The \pkg{GAnnoViz} package provides tools for genomic annotation using
 sliding windows and GFF/GTF parsing.
 }
 \section{Main Functions}{

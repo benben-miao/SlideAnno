@@ -36,16 +36,16 @@ A data.frame with columns: (\bold{\emph{chrom, start, end, GeneID, log2FoldChang
 Annotate \bold{\emph{differentially expressed genes (DEGs)}} with chromosome positions.
 }
 \examples{
-# Example DEGs and GFF in SlideAnno
+# Example DEGs and GFF in GAnnoViz
 deg_file <- system.file(
   "extdata",
   "example.deg",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 # Annotate DEGs with chromosome positions
 res <- anno_deg_chrom(

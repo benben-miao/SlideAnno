@@ -55,16 +55,16 @@ log2FoldChange, strand***).
 ## Examples
 
 ``` r
-# Example DEGs and GFF in SlideAnno
+# Example DEGs and GFF in GAnnoViz
 deg_file <- system.file(
   "extdata",
   "example.deg",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 # Annotate DEGs with chromosome positions
 res <- anno_deg_chrom(
@@ -76,8 +76,18 @@ res <- anno_deg_chrom(
   use_strand = FALSE,
   drop_unmapped = TRUE
 )
-#> Warning: file("") only supports open = "w+" and open = "w+b": using the former
-#> Error in utils::read.table(deg_file, header = TRUE, sep = "\t", fill = TRUE,     na.strings = "NA", stringsAsFactors = FALSE, check.names = FALSE): no lines available in input
+#> Import genomic features from the file as a GRanges object ... 
+#> OK
+#> Prepare the 'metadata' data frame ... 
+#> OK
+#> Make the TxDb object ... 
+#> OK
 head(res)
-#> Error: object 'res' not found
+#>   chrom    start      end   gene_id     score strand
+#> 1 chr14 12802589 12807112 HdF000031  1.408356      *
+#> 2 chr14 12979855 12984114 HdF000041 -1.114777      *
+#> 3 chr14 13092225 13094734 HdF000049  1.271638      *
+#> 4 chr14 13915421 13919063 HdF000066 -6.180426      *
+#> 5 chr14 15038730 15050966 HdF000091 -1.250090      *
+#> 6 chr14 15455652 15456778 HdF000106 -6.085891      *
 ```

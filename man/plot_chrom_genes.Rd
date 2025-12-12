@@ -60,11 +60,11 @@ A ggplot object of chromosomes with gene labels.
 Plot \bold{\emph{chromosome structures}} and gene annotation.
 }
 \examples{
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 genes <- data.frame(
   gene_id = c("HdF029609", "HdF029610"),

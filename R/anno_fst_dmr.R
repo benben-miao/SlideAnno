@@ -147,13 +147,14 @@ anno_fst_dmr <- function(gff_file,
 		}
 	}
 
-	# Genomic ranges file
-	range_df <- utils::read.table(
-		genomic_ranges,
-		header = TRUE,
-		sep = "\t",
-		stringsAsFactors = FALSE
-	)
+  # Genomic ranges file
+  range_df <- utils::read.table(
+    genomic_ranges,
+    header = TRUE,
+    sep = "\t",
+    fill = TRUE,
+    stringsAsFactors = FALSE
+  )
 	if (!all(c(chrom_col, start_col, end_col) %in% colnames(range_df)))
 		stop("genomic_ranges must contain columns: ", paste(c(chrom_col, start_col, end_col), collapse = ", "))
 

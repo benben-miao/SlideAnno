@@ -69,11 +69,11 @@ Plot of genomic interval structure.
 Plot gene structures for a \bold{\emph{genomic interval}}.
 }
 \examples{
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 plot_interval_structure(
   gff_file = gff_file,

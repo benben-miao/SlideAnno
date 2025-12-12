@@ -20,11 +20,11 @@ A \bold{\emph{GRanges}} object.
 Extract \bold{\emph{3'UTR}} ranges from GFF or GTF.
 }
 \examples{
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 # Extract 3'UTR
 utr3 <- extract_utr3(

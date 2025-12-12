@@ -48,11 +48,11 @@ benben-miao
 ## Examples
 
 ``` r
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 # Extract Promoters
 promoters <- extract_promoters(
@@ -61,10 +61,29 @@ promoters <- extract_promoters(
   upstream = 2000,
   downstream = 200,
   promoter_info = "all")
-#> Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format): Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'
-#>   argument to specify the format ("gff3" or "gtf").
+#> Import genomic features from the file as a GRanges object ... 
+#> OK
+#> Prepare the 'metadata' data frame ... 
+#> OK
+#> Make the TxDb object ... 
+#> OK
 promoters
-#> Error: object 'promoters' not found
+#> GRanges object with 28263 ranges and 2 metadata columns:
+#>                     seqnames          ranges strand |     tx_id         tx_name
+#>                        <Rle>       <IRanges>  <Rle> | <integer>     <character>
+#>     nbis-mrna-126       chr1   807987-810186      + |         1   nbis-mrna-126
+#>     nbis-mrna-127       chr1   882426-884625      + |         2   nbis-mrna-127
+#>     nbis-mrna-129       chr1   949197-951396      + |         3   nbis-mrna-129
+#>     nbis-mrna-130       chr1 1058746-1060945      + |         4   nbis-mrna-130
+#>     nbis-mrna-132       chr1 1184302-1186501      + |         5   nbis-mrna-132
+#>               ...        ...             ...    ... .       ...             ...
+#>   nbis-mrna-11014 superscaf8   224875-227074      + |     28259 nbis-mrna-11014
+#>   nbis-mrna-11016 superscaf8   308498-310697      + |     28260 nbis-mrna-11016
+#>   nbis-mrna-11018 superscaf8   365010-367209      + |     28261 nbis-mrna-11018
+#>   nbis-mrna-11015 superscaf8   246523-248722      - |     28262 nbis-mrna-11015
+#>   nbis-mrna-11017 superscaf8   356750-358949      - |     28263 nbis-mrna-11017
+#>   -------
+#>   seqinfo: 89 sequences from an unspecified genome; no seqlengths
 
 # Promoter info: promoter_id
 promoter_id <- extract_promoters(
@@ -73,10 +92,15 @@ promoter_id <- extract_promoters(
   upstream = 2000,
   downstream = 200,
   promoter_info = "promoter_id")
-#> Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format): Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'
-#>   argument to specify the format ("gff3" or "gtf").
+#> Import genomic features from the file as a GRanges object ... 
+#> OK
+#> Prepare the 'metadata' data frame ... 
+#> OK
+#> Make the TxDb object ... 
+#> OK
 head(promoter_id)
-#> Error: object 'promoter_id' not found
+#> [1] "nbis-mrna-126" "nbis-mrna-127" "nbis-mrna-129" "nbis-mrna-130"
+#> [5] "nbis-mrna-132" "nbis-mrna-134"
 
 # Promoter info: promoter_range
 promoter_range <- extract_promoters(
@@ -85,8 +109,20 @@ promoter_range <- extract_promoters(
   upstream = 2000,
   downstream = 200,
   promoter_info = "promoter_range")
-#> Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format): Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'
-#>   argument to specify the format ("gff3" or "gtf").
+#> Import genomic features from the file as a GRanges object ... 
+#> OK
+#> Prepare the 'metadata' data frame ... 
+#> OK
+#> Make the TxDb object ... 
+#> OK
 head(promoter_range)
-#> Error: object 'promoter_range' not found
+#> IRanges object with 6 ranges and 0 metadata columns:
+#>                     start       end     width
+#>                 <integer> <integer> <integer>
+#>   nbis-mrna-126    807987    810186      2200
+#>   nbis-mrna-127    882426    884625      2200
+#>   nbis-mrna-129    949197    951396      2200
+#>   nbis-mrna-130   1058746   1060945      2200
+#>   nbis-mrna-132   1184302   1186501      2200
+#>   nbis-mrna-134   1259096   1261295      2200
 ```

@@ -39,11 +39,11 @@ Plot SNP density at chromosome level.
 ## Examples
 
 ``` r
-# Example data in SlideAnno
+# Example data in GAnnoViz
 fst_file <- system.file(
   "extdata",
   "example.fst",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 # Plot SNP density
 plot_snp_density(
@@ -52,6 +52,5 @@ plot_snp_density(
   bin_size = 1e6,
   density_color = c("#0088ff", "#ff8800", "#ff0000")
 )
-#> Warning: file("") only supports open = "w+" and open = "w+b": using the former
-#> Error in utils::read.table(fst_file, header = TRUE, sep = "\t", fill = TRUE,     na.strings = "NA", stringsAsFactors = FALSE): no lines available in input
+
 ```

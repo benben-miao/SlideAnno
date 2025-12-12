@@ -45,11 +45,11 @@ Plot of chromosome structure.
 Plot \bold{\emph{chromosome structures and gene stats}}.
 }
 \examples{
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 plot_chrom_structure(
   gff_file = gff_file,

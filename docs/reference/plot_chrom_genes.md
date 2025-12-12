@@ -94,11 +94,11 @@ A ggplot object of chromosomes with gene labels.
 ## Examples
 
 ``` r
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 genes <- data.frame(
   gene_id = c("HdF029609", "HdF029610"),
@@ -110,8 +110,13 @@ plot_chrom_genes(
   gene_table = genes,
   annotate = "name",
   orientation = "vertical")
-#> Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format): Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'
-#>   argument to specify the format ("gff3" or "gtf").
+#> Import genomic features from the file as a GRanges object ... 
+#> OK
+#> Prepare the 'metadata' data frame ... 
+#> OK
+#> Make the TxDb object ... 
+#> OK
+
 
 # Horizontal, annotate by id
 plot_chrom_genes(
@@ -119,6 +124,13 @@ plot_chrom_genes(
   gene_table = genes,
   annotate = "id",
   orientation = "horizontal")
-#> Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format): Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'
-#>   argument to specify the format ("gff3" or "gtf").
+#> Import genomic features from the file as a GRanges object ... 
+#> OK
+#> Prepare the 'metadata' data frame ... 
+#> OK
+#> Make the TxDb object ... 
+#> OK
+#> Coordinate system already present.
+#> ℹ Adding new coordinate system, which will replace the existing one.
+
 ```

@@ -47,11 +47,11 @@ benben-miao
 ## Examples
 
 ``` r
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
     "extdata",
     "example.gff",
-    package = "SlideAnno")
+    package = "GAnnoViz")
 
 # Plot gene stats
 plot_gene_stats(
@@ -60,6 +60,11 @@ plot_gene_stats(
     bar_width = 0.7,
     bar_color = "#0055ff55",
     lable_size = 3)
-#> Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format): Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'
-#>   argument to specify the format ("gff3" or "gtf").
+#> Import genomic features from the file as a GRanges object ... 
+#> OK
+#> Prepare the 'metadata' data frame ... 
+#> OK
+#> Make the TxDb object ... 
+#> OK
+
 ```

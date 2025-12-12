@@ -108,11 +108,11 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example GFF3 file in SlideAnno</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Example GFF3 file in GAnnoViz</span></span></span>
 <span class="r-in"><span><span class="va">gff_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>  <span class="st">"extdata"</span>,</span></span>
 <span class="r-in"><span>  <span class="st">"example.gff"</span>,</span></span>
-<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"SlideAnno"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>  package <span class="op">=</span> <span class="st">"GAnnoViz"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">plot_chrom_structure</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span></span>
@@ -126,8 +126,13 @@
 <span class="r-in"><span>  telomere_color <span class="op">=</span> <span class="st">"#ff0000"</span>,</span></span>
 <span class="r-in"><span>  label_size <span class="op">=</span> <span class="fl">3</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in txdbmaker::makeTxDbFromGFF(file = gff_file, format = format):</span> Cannot detect whether 'file' is a GFF3 or GTF file. Please use the 'format'</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span>   argument to specify the format ("gff3" or "gtf").</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Import genomic features from the file as a GRanges object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Prepare the 'metadata' data frame ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Make the TxDb object ... </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> OK</span>
+<span class="r-plt img"><img src="plot_chrom_structure-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

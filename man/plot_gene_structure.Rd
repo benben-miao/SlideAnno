@@ -63,11 +63,11 @@ Plot of gene structure.
 Plot gene structure (\bold{\emph{Promoter, 3'UTR, Exon, Intron, 5'UTR}}).
 }
 \examples{
-# Example GFF3 file in SlideAnno
+# Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
   "example.gff",
-  package = "SlideAnno")
+  package = "GAnnoViz")
 
 # Plot gene structure
 plot_gene_structure(
