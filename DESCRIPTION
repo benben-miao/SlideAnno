@@ -1,11 +1,11 @@
-Package: SlideAnno
+Package: GAnnoViz
 Type: Package
-Title: Genomic sliding window annotation.
+Title: Genomic annotation and visualization.
 Version: 0.1.0
-URL: https://github.com/benben-miao/SlideAnno
-BugReports: https://github.com/benben-miao/SlideAnno/issues
+URL: https://github.com/benben-miao/GAnnoViz
+BugReports: https://github.com/benben-miao/GAnnoViz/issues
 Authors@R: person(given = "Benben", family = "Miao", role = c("aut","cre"), email = "benben.miao@outlook.com")
-Description: Genome sliding window annotation and other annotation functions, such as WGS FST, WGBS DMR, RNA-Seq DEG, etc.
+Description: Genomic annotation and visualization, such as Gene structure, WGS FST, WGBS DMR, RNA-Seq DEG, etc.
 Depends: R (>= 4.2)
 Imports:
     ggplot2,
