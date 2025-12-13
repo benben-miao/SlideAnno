@@ -25,7 +25,8 @@ Imports:
     S4Vectors,
     CMplot,
     grid,
-    txdbmaker
+    txdbmaker,
+    kableExtra
 Suggests:
     knitr (>= 1.0),
     rmarkdown,

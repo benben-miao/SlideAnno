@@ -58,6 +58,7 @@ GAnnoViz: a R package for genomic annotation and visualization.
 
 library(GAnnoViz)
 library(ggplot2)
+library(kableExtra)
 ```
 
 ## 3. Shiny App

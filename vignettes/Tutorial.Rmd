@@ -62,6 +62,7 @@ GAnnoViz: a R package for genomic annotation and visualization.
 
 library(GAnnoViz)
 library(ggplot2)
+library(kableExtra)
 ```
 
 ## 3. Shiny App
@@ -93,7 +94,19 @@ gene_range <- extract_genes(
   gff_file = gff_file,
   format = "auto",
   gene_info = "gene_range")
-head(gene_range)
+# head(gene_range)
+
+head(gene_range) %>%
+  kbl(
+    caption = "Table. Gene range results", 
+    escape = FALSE, 
+    align = "c") %>%
+  kable_classic(
+    "striped", 
+    full_width = TRUE, 
+    html_font = "Times") %>%
+  row_spec(0, bold = TRUE) %>%
+  row_spec(1:5, extra_css = "line-height: 2em;")
 ```
 
 ### Extract CDS
@@ -111,7 +124,19 @@ cds_range <- extract_cds(
   gff_file = gff_file,
   format = "auto",
   cds_info = "cds_range")
-head(cds_range)
+# head(cds_range)
+
+head(cds_range) %>%
+  kbl(
+    caption = "Table. CDS range results", 
+    escape = FALSE, 
+    align = "c") %>%
+  kable_classic(
+    "striped", 
+    full_width = TRUE, 
+    html_font = "Times") %>%
+  row_spec(0, bold = TRUE) %>%
+  row_spec(1:5, extra_css = "line-height: 2em;")
 ```
 
 ### Extract Promoters
@@ -133,7 +158,19 @@ promoter_range <- extract_promoters(
   upstream = 2000,
   downstream = 200,
   promoter_info = "promoter_range")
-head(promoter_range)
+# head(promoter_range)
+
+head(promoter_range) %>%
+  kbl(
+    caption = "Table. Promoter range results", 
+    escape = FALSE, 
+    align = "c") %>%
+  kable_classic(
+    "striped", 
+    full_width = TRUE, 
+    html_font = "Times") %>%
+  row_spec(0, bold = TRUE) %>%
+  row_spec(1:5, extra_css = "line-height: 2em;")
 ```
 
 ### Extract 5'UTR
@@ -151,7 +188,19 @@ utr5_range <- extract_utr5(
   gff_file = gff_file,
   format = "auto",
   utr5_info = "utr5_range")
-head(utr5_range)
+# head(utr5_range)
+
+head(utr5_range) %>%
+  kbl(
+    caption = "Table. 5'UTR range results", 
+    escape = FALSE, 
+    align = "c") %>%
+  kable_classic(
+    "striped", 
+    full_width = TRUE, 
+    html_font = "Times") %>%
+  row_spec(0, bold = TRUE) %>%
+  row_spec(1:5, extra_css = "line-height: 2em;")
 ```
 
 ## 5. Plot Structure
@@ -290,7 +339,19 @@ deg <- read.table(
   na.strings = NA,
   stringsAsFactors = FALSE
 )
-head(deg)
+# head(deg)
+
+head(deg) %>%
+  kbl(
+    caption = "Table. DEGs results from DESeq2", 
+    escape = FALSE, 
+    align = "c") %>%
+  kable_classic(
+    "striped", 
+    full_width = TRUE, 
+    html_font = "Times") %>%
+  row_spec(0, bold = TRUE) %>%
+  row_spec(1:5, extra_css = "line-height: 2em;")
 ```
 
 ```{r anno_deg_chrom}
@@ -304,7 +365,19 @@ res <- anno_deg_chrom(
   use_strand = FALSE,
   drop_unmapped = TRUE
 )
-head(res)
+# head(res)
+
+head(res) %>%
+  kbl(
+    caption = "Table. DEGs annotation results", 
+    escape = FALSE, 
+    align = "c") %>%
+  kable_classic(
+    "striped", 
+    full_width = TRUE, 
+    html_font = "Times") %>%
+  row_spec(0, bold = TRUE) %>%
+  row_spec(1:5, extra_css = "line-height: 2em;")
 ```
 
 ### Plot genomic feature density heatmap
@@ -360,7 +433,19 @@ fst <- read.table(
   na.strings = "NA",
   stringsAsFactors = FALSE
 )
-head(fst)
+# head(fst)
+
+head(fst) %>%
+  kbl(
+    caption = "Table. FST results from VCFtools", 
+    escape = FALSE, 
+    align = "c") %>%
+  kable_classic(
+    "striped", 
+    full_width = TRUE, 
+    html_font = "Times") %>%
+  row_spec(0, bold = TRUE) %>%
+  row_spec(1:5, extra_css = "line-height: 2em;")
 ```
 
 ```{r anno_fst}
@@ -376,7 +461,19 @@ res <- anno_fst_dmr(
   ignore_strand = TRUE,
   features = c("promoter", "UTR5", "gene", "exon", "intron", "CDS", "UTR3", "intergenic")
 )
-head(res)
+# head(res)
+
+head(res) %>%
+  kbl(
+    caption = "Table. FST annotation results", 
+    escape = FALSE, 
+    align = "c") %>%
+  kable_classic(
+    "striped", 
+    full_width = TRUE, 
+    html_font = "Times") %>%
+  row_spec(0, bold = TRUE) %>%
+  row_spec(1:5, extra_css = "line-height: 2em;")
 ```
 
 ### Annotate DMR slide windows with genomic features
@@ -395,7 +492,19 @@ dmr <- read.table(
   na.strings = "NA",
   stringsAsFactors = FALSE
 )
-head(dmr)
+# head(dmr)
+
+head(dmr) %>%
+  kbl(
+    caption = "Table. DMR results from MethylKit", 
+    escape = FALSE, 
+    align = "c") %>%
+  kable_classic(
+    "striped", 
+    full_width = TRUE, 
+    html_font = "Times") %>%
+  row_spec(0, bold = TRUE) %>%
+  row_spec(1:5, extra_css = "line-height: 2em;")
 ```
 
 ```{r anno_dmr}
@@ -411,7 +520,19 @@ res <- anno_fst_dmr(
   ignore_strand = TRUE,
   features = c("promoter", "UTR5", "gene", "exon", "intron", "CDS", "UTR3", "intergenic")
 )
-head(res)
+# head(res)
+
+head(res) %>%
+  kbl(
+    caption = "Table. DMR annotation results", 
+    escape = FALSE, 
+    align = "c") %>%
+  kable_classic(
+    "striped", 
+    full_width = TRUE, 
+    html_font = "Times") %>%
+  row_spec(0, bold = TRUE) %>%
+  row_spec(1:5, extra_css = "line-height: 2em;")
 ```
 
 ### Plot SNP density at chromosome level

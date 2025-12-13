@@ -57,6 +57,15 @@ fst_table <- system.file(
     "example.fst",
     package = "GAnnoViz")
 
+fst <- read.table(
+	file = fst_table,
+	header = TRUE,
+	sep = "\t",
+	na.strings = NA,
+	stringsAsFactors = FALSE
+)
+head(fst)
+
 res <- anno_fst_dmr(
   gff_file = gff_file,
   format = "auto",
@@ -76,6 +85,15 @@ dmr_table <- system.file(
     "extdata",
     "example.dmr",
     package = "GAnnoViz")
+
+dmr <- read.table(
+	file = dmr_table,
+	header = TRUE,
+	sep = "\t",
+	na.strings = NA,
+	stringsAsFactors = FALSE
+)
+head(dmr)
 
 res <- anno_fst_dmr(
   gff_file = gff_file,

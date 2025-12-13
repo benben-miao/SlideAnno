@@ -55,7 +55,7 @@
 
 
 
-
+<script src="Tutorial_files/kePrint-0.0.1/kePrint.js"></script><link href="Tutorial_files/lightable-0.0.1/lightable.css" rel="stylesheet">
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
@@ -151,16 +151,124 @@ reproducible outputs</li>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span>
 <span>  gene_info <span class="op">=</span> <span class="st">"gene_range"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">gene_range</span><span class="op">)</span></span>
-<span><span class="co">#&gt; IRanges object with 6 ranges and 0 metadata columns:</span></span>
-<span><span class="co">#&gt;                 start       end     width</span></span>
-<span><span class="co">#&gt;             &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;</span></span>
-<span><span class="co">#&gt;   HdF000001  10724003  10725460      1458</span></span>
-<span><span class="co">#&gt;   HdF000002  10808174  10823308     15135</span></span>
-<span><span class="co">#&gt;   HdF000003  10911391  10930352     18962</span></span>
-<span><span class="co">#&gt;   HdF000004  10939872  10941326      1455</span></span>
-<span><span class="co">#&gt;   HdF000005  10982117  10999259     17143</span></span>
-<span><span class="co">#&gt;   HdF000006  11012358  11024009     11652</span></span></code></pre></div>
+<span><span class="co"># head(gene_range)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">gene_range</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kbl</span><span class="op">(</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"Table. Gene range results"</span>, </span>
+<span>    escape <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>    align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span></span>
+<span>    <span class="st">"striped"</span>, </span>
+<span>    full_width <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    html_font <span class="op">=</span> <span class="st">"Times"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">0</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, extra_css <span class="op">=</span> <span class="st">"line-height: 2em;"</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic lightable-striped" style="font-family: Times; margin-left: auto; margin-right: auto;">
+<caption>
+Table. Gene range results
+</caption>
+<thead><tr>
+<th style="text-align:center;font-weight: bold;">
+start
+</th>
+<th style="text-align:center;font-weight: bold;">
+end
+</th>
+<th style="text-align:center;font-weight: bold;">
+width
+</th>
+<th style="text-align:center;font-weight: bold;">
+names
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+10724003
+</td>
+<td style="text-align:center;line-height: 2em;">
+10725460
+</td>
+<td style="text-align:center;line-height: 2em;">
+1458
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF000001
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+10808174
+</td>
+<td style="text-align:center;line-height: 2em;">
+10823308
+</td>
+<td style="text-align:center;line-height: 2em;">
+15135
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF000002
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+10911391
+</td>
+<td style="text-align:center;line-height: 2em;">
+10930352
+</td>
+<td style="text-align:center;line-height: 2em;">
+18962
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF000003
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+10939872
+</td>
+<td style="text-align:center;line-height: 2em;">
+10941326
+</td>
+<td style="text-align:center;line-height: 2em;">
+1455
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF000004
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+10982117
+</td>
+<td style="text-align:center;line-height: 2em;">
+10999259
+</td>
+<td style="text-align:center;line-height: 2em;">
+17143
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF000005
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+11012358
+</td>
+<td style="text-align:center;">
+11024009
+</td>
+<td style="text-align:center;">
+11652
+</td>
+<td style="text-align:center;">
+HdF000006
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level4">
 <h4 id="extract-cds">Extract CDS<a class="anchor" aria-label="anchor" href="#extract-cds"></a>
@@ -178,16 +286,103 @@ reproducible outputs</li>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span>
 <span>  cds_info <span class="op">=</span> <span class="st">"cds_range"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">cds_range</span><span class="op">)</span></span>
-<span><span class="co">#&gt; IRanges object with 6 ranges and 0 metadata columns:</span></span>
-<span><span class="co">#&gt;           start       end     width</span></span>
-<span><span class="co">#&gt;       &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;</span></span>
-<span><span class="co">#&gt;   [1]    810081    810090        10</span></span>
-<span><span class="co">#&gt;   [2]    816466    816734       269</span></span>
-<span><span class="co">#&gt;   [3]    818765    818971       207</span></span>
-<span><span class="co">#&gt;   [4]    819680    819740        61</span></span>
-<span><span class="co">#&gt;   [5]    821042    821214       173</span></span>
-<span><span class="co">#&gt;   [6]    825267    825329        63</span></span></code></pre></div>
+<span><span class="co"># head(cds_range)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">cds_range</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kbl</span><span class="op">(</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"Table. CDS range results"</span>, </span>
+<span>    escape <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>    align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span></span>
+<span>    <span class="st">"striped"</span>, </span>
+<span>    full_width <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    html_font <span class="op">=</span> <span class="st">"Times"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">0</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, extra_css <span class="op">=</span> <span class="st">"line-height: 2em;"</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic lightable-striped" style="font-family: Times; margin-left: auto; margin-right: auto;">
+<caption>
+Table. CDS range results
+</caption>
+<thead><tr>
+<th style="text-align:center;font-weight: bold;">
+start
+</th>
+<th style="text-align:center;font-weight: bold;">
+end
+</th>
+<th style="text-align:center;font-weight: bold;">
+width
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+810081
+</td>
+<td style="text-align:center;line-height: 2em;">
+810090
+</td>
+<td style="text-align:center;line-height: 2em;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+816466
+</td>
+<td style="text-align:center;line-height: 2em;">
+816734
+</td>
+<td style="text-align:center;line-height: 2em;">
+269
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+818765
+</td>
+<td style="text-align:center;line-height: 2em;">
+818971
+</td>
+<td style="text-align:center;line-height: 2em;">
+207
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+819680
+</td>
+<td style="text-align:center;line-height: 2em;">
+819740
+</td>
+<td style="text-align:center;line-height: 2em;">
+61
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+821042
+</td>
+<td style="text-align:center;line-height: 2em;">
+821214
+</td>
+<td style="text-align:center;line-height: 2em;">
+173
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+825267
+</td>
+<td style="text-align:center;">
+825329
+</td>
+<td style="text-align:center;">
+63
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level4">
 <h4 id="extract-promoters">Extract Promoters<a class="anchor" aria-label="anchor" href="#extract-promoters"></a>
@@ -209,16 +404,124 @@ reproducible outputs</li>
 <span>  upstream <span class="op">=</span> <span class="fl">2000</span>,</span>
 <span>  downstream <span class="op">=</span> <span class="fl">200</span>,</span>
 <span>  promoter_info <span class="op">=</span> <span class="st">"promoter_range"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">promoter_range</span><span class="op">)</span></span>
-<span><span class="co">#&gt; IRanges object with 6 ranges and 0 metadata columns:</span></span>
-<span><span class="co">#&gt;                     start       end     width</span></span>
-<span><span class="co">#&gt;                 &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;</span></span>
-<span><span class="co">#&gt;   nbis-mrna-126    807987    810186      2200</span></span>
-<span><span class="co">#&gt;   nbis-mrna-127    882426    884625      2200</span></span>
-<span><span class="co">#&gt;   nbis-mrna-129    949197    951396      2200</span></span>
-<span><span class="co">#&gt;   nbis-mrna-130   1058746   1060945      2200</span></span>
-<span><span class="co">#&gt;   nbis-mrna-132   1184302   1186501      2200</span></span>
-<span><span class="co">#&gt;   nbis-mrna-134   1259096   1261295      2200</span></span></code></pre></div>
+<span><span class="co"># head(promoter_range)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">promoter_range</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kbl</span><span class="op">(</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"Table. Promoter range results"</span>, </span>
+<span>    escape <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>    align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span></span>
+<span>    <span class="st">"striped"</span>, </span>
+<span>    full_width <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    html_font <span class="op">=</span> <span class="st">"Times"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">0</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, extra_css <span class="op">=</span> <span class="st">"line-height: 2em;"</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic lightable-striped" style="font-family: Times; margin-left: auto; margin-right: auto;">
+<caption>
+Table. Promoter range results
+</caption>
+<thead><tr>
+<th style="text-align:center;font-weight: bold;">
+start
+</th>
+<th style="text-align:center;font-weight: bold;">
+end
+</th>
+<th style="text-align:center;font-weight: bold;">
+width
+</th>
+<th style="text-align:center;font-weight: bold;">
+names
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+807987
+</td>
+<td style="text-align:center;line-height: 2em;">
+810186
+</td>
+<td style="text-align:center;line-height: 2em;">
+2200
+</td>
+<td style="text-align:center;line-height: 2em;">
+nbis-mrna-126
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+882426
+</td>
+<td style="text-align:center;line-height: 2em;">
+884625
+</td>
+<td style="text-align:center;line-height: 2em;">
+2200
+</td>
+<td style="text-align:center;line-height: 2em;">
+nbis-mrna-127
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+949197
+</td>
+<td style="text-align:center;line-height: 2em;">
+951396
+</td>
+<td style="text-align:center;line-height: 2em;">
+2200
+</td>
+<td style="text-align:center;line-height: 2em;">
+nbis-mrna-129
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+1058746
+</td>
+<td style="text-align:center;line-height: 2em;">
+1060945
+</td>
+<td style="text-align:center;line-height: 2em;">
+2200
+</td>
+<td style="text-align:center;line-height: 2em;">
+nbis-mrna-130
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+1184302
+</td>
+<td style="text-align:center;line-height: 2em;">
+1186501
+</td>
+<td style="text-align:center;line-height: 2em;">
+2200
+</td>
+<td style="text-align:center;line-height: 2em;">
+nbis-mrna-132
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1259096
+</td>
+<td style="text-align:center;">
+1261295
+</td>
+<td style="text-align:center;">
+2200
+</td>
+<td style="text-align:center;">
+nbis-mrna-134
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level4">
 <h4 id="extract-5utr">Extract 5’UTR<a class="anchor" aria-label="anchor" href="#extract-5utr"></a>
@@ -236,16 +539,124 @@ reproducible outputs</li>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span>
 <span>  utr5_info <span class="op">=</span> <span class="st">"utr5_range"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">utr5_range</span><span class="op">)</span></span>
-<span><span class="co">#&gt; IRanges object with 6 ranges and 0 metadata columns:</span></span>
-<span><span class="co">#&gt;         start       end     width</span></span>
-<span><span class="co">#&gt;     &lt;integer&gt; &lt;integer&gt; &lt;integer&gt;</span></span>
-<span><span class="co">#&gt;   1    809987    810080        94</span></span>
-<span><span class="co">#&gt;   2    884426    884645       220</span></span>
-<span><span class="co">#&gt;   3    951197    951558       362</span></span>
-<span><span class="co">#&gt;   3    952741    952756        16</span></span>
-<span><span class="co">#&gt;   4   1060746   1060848       103</span></span>
-<span><span class="co">#&gt;   6   1261096   1261128        33</span></span></code></pre></div>
+<span><span class="co"># head(utr5_range)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">utr5_range</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kbl</span><span class="op">(</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"Table. 5'UTR range results"</span>, </span>
+<span>    escape <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>    align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span></span>
+<span>    <span class="st">"striped"</span>, </span>
+<span>    full_width <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    html_font <span class="op">=</span> <span class="st">"Times"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">0</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, extra_css <span class="op">=</span> <span class="st">"line-height: 2em;"</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic lightable-striped" style="font-family: Times; margin-left: auto; margin-right: auto;">
+<caption>
+Table. 5’UTR range results
+</caption>
+<thead><tr>
+<th style="text-align:center;font-weight: bold;">
+start
+</th>
+<th style="text-align:center;font-weight: bold;">
+end
+</th>
+<th style="text-align:center;font-weight: bold;">
+width
+</th>
+<th style="text-align:center;font-weight: bold;">
+names
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+809987
+</td>
+<td style="text-align:center;line-height: 2em;">
+810080
+</td>
+<td style="text-align:center;line-height: 2em;">
+94
+</td>
+<td style="text-align:center;line-height: 2em;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+884426
+</td>
+<td style="text-align:center;line-height: 2em;">
+884645
+</td>
+<td style="text-align:center;line-height: 2em;">
+220
+</td>
+<td style="text-align:center;line-height: 2em;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+951197
+</td>
+<td style="text-align:center;line-height: 2em;">
+951558
+</td>
+<td style="text-align:center;line-height: 2em;">
+362
+</td>
+<td style="text-align:center;line-height: 2em;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+952741
+</td>
+<td style="text-align:center;line-height: 2em;">
+952756
+</td>
+<td style="text-align:center;line-height: 2em;">
+16
+</td>
+<td style="text-align:center;line-height: 2em;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+1060746
+</td>
+<td style="text-align:center;line-height: 2em;">
+1060848
+</td>
+<td style="text-align:center;line-height: 2em;">
+103
+</td>
+<td style="text-align:center;line-height: 2em;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+1261096
+</td>
+<td style="text-align:center;">
+1261128
+</td>
+<td style="text-align:center;">
+33
+</td>
+<td style="text-align:center;">
+6
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="section level3">
@@ -395,21 +806,187 @@ positions<a class="anchor" aria-label="anchor" href="#annotate-differentially-ex
 <span>  na.strings <span class="op">=</span> <span class="cn">NA</span>,</span>
 <span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">deg</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      GeneID    baseMean log2FoldChange     lfcSE      stat       pvalue</span></span>
-<span><span class="co">#&gt; 1 HdF054777   16.999581      -1.480620 0.7189789 -2.059337 3.946195e-02</span></span>
-<span><span class="co">#&gt; 2 HdF055254   10.012632       3.039624 1.3467639  2.256984 2.400909e-02</span></span>
-<span><span class="co">#&gt; 3 HdF055463    3.926022       5.319215 2.2806921  2.332281 1.968590e-02</span></span>
-<span><span class="co">#&gt; 4 HdF027237 1433.976916      -1.802171 0.3336465 -5.401438 6.610888e-08</span></span>
-<span><span class="co">#&gt; 5 HdF027261  178.124271      -1.049145 0.4681808 -2.240897 2.503274e-02</span></span>
-<span><span class="co">#&gt; 6 HdF002748  185.015989       2.051539 0.9494449  2.160778 3.071251e-02</span></span>
-<span><span class="co">#&gt;           padj</span></span>
-<span><span class="co">#&gt; 1 5.479174e-01</span></span>
-<span><span class="co">#&gt; 2 4.341369e-01</span></span>
-<span><span class="co">#&gt; 3           NA</span></span>
-<span><span class="co">#&gt; 4 2.832689e-05</span></span>
-<span><span class="co">#&gt; 5 4.406169e-01</span></span>
-<span><span class="co">#&gt; 6 4.865774e-01</span></span></code></pre></div>
+<span><span class="co"># head(deg)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">deg</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kbl</span><span class="op">(</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"Table. DEGs results from DESeq2"</span>, </span>
+<span>    escape <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>    align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span></span>
+<span>    <span class="st">"striped"</span>, </span>
+<span>    full_width <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    html_font <span class="op">=</span> <span class="st">"Times"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">0</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, extra_css <span class="op">=</span> <span class="st">"line-height: 2em;"</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic lightable-striped" style="font-family: Times; margin-left: auto; margin-right: auto;">
+<caption>
+Table. DEGs results from DESeq2
+</caption>
+<thead><tr>
+<th style="text-align:center;font-weight: bold;">
+GeneID
+</th>
+<th style="text-align:center;font-weight: bold;">
+baseMean
+</th>
+<th style="text-align:center;font-weight: bold;">
+log2FoldChange
+</th>
+<th style="text-align:center;font-weight: bold;">
+lfcSE
+</th>
+<th style="text-align:center;font-weight: bold;">
+stat
+</th>
+<th style="text-align:center;font-weight: bold;">
+pvalue
+</th>
+<th style="text-align:center;font-weight: bold;">
+padj
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+HdF054777
+</td>
+<td style="text-align:center;line-height: 2em;">
+16.999581
+</td>
+<td style="text-align:center;line-height: 2em;">
+-1.480620
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.7189789
+</td>
+<td style="text-align:center;line-height: 2em;">
+-2.059337
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0394619
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.5479174
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+HdF055254
+</td>
+<td style="text-align:center;line-height: 2em;">
+10.012632
+</td>
+<td style="text-align:center;line-height: 2em;">
+3.039624
+</td>
+<td style="text-align:center;line-height: 2em;">
+1.3467639
+</td>
+<td style="text-align:center;line-height: 2em;">
+2.256984
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0240091
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.4341369
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+HdF055463
+</td>
+<td style="text-align:center;line-height: 2em;">
+3.926022
+</td>
+<td style="text-align:center;line-height: 2em;">
+5.319215
+</td>
+<td style="text-align:center;line-height: 2em;">
+2.2806921
+</td>
+<td style="text-align:center;line-height: 2em;">
+2.332281
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0196859
+</td>
+<td style="text-align:center;line-height: 2em;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+HdF027237
+</td>
+<td style="text-align:center;line-height: 2em;">
+1433.976916
+</td>
+<td style="text-align:center;line-height: 2em;">
+-1.802171
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.3336465
+</td>
+<td style="text-align:center;line-height: 2em;">
+-5.401438
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000001
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000283
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+HdF027261
+</td>
+<td style="text-align:center;line-height: 2em;">
+178.124271
+</td>
+<td style="text-align:center;line-height: 2em;">
+-1.049145
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.4681808
+</td>
+<td style="text-align:center;line-height: 2em;">
+-2.240897
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0250327
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.4406169
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+HdF002748
+</td>
+<td style="text-align:center;">
+185.015989
+</td>
+<td style="text-align:center;">
+2.051539
+</td>
+<td style="text-align:center;">
+0.9494449
+</td>
+<td style="text-align:center;">
+2.160778
+</td>
+<td style="text-align:center;">
+0.0307125
+</td>
+<td style="text-align:center;">
+0.4865774
+</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Annotate DEGs with chromosome positions</span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anno_deg_chrom.html">anno_deg_chrom</a></span><span class="op">(</span></span>
@@ -421,14 +998,166 @@ positions<a class="anchor" aria-label="anchor" href="#annotate-differentially-ex
 <span>  use_strand <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  drop_unmapped <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   chrom    start      end   gene_id     score strand</span></span>
-<span><span class="co">#&gt; 1 chr14 12802589 12807112 HdF000031  1.408356      *</span></span>
-<span><span class="co">#&gt; 2 chr14 12979855 12984114 HdF000041 -1.114777      *</span></span>
-<span><span class="co">#&gt; 3 chr14 13092225 13094734 HdF000049  1.271638      *</span></span>
-<span><span class="co">#&gt; 4 chr14 13915421 13919063 HdF000066 -6.180426      *</span></span>
-<span><span class="co">#&gt; 5 chr14 15038730 15050966 HdF000091 -1.250090      *</span></span>
-<span><span class="co">#&gt; 6 chr14 15455652 15456778 HdF000106 -6.085891      *</span></span></code></pre></div>
+<span><span class="co"># head(res)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kbl</span><span class="op">(</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"Table. DEGs annotation results"</span>, </span>
+<span>    escape <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>    align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span></span>
+<span>    <span class="st">"striped"</span>, </span>
+<span>    full_width <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    html_font <span class="op">=</span> <span class="st">"Times"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">0</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, extra_css <span class="op">=</span> <span class="st">"line-height: 2em;"</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic lightable-striped" style="font-family: Times; margin-left: auto; margin-right: auto;">
+<caption>
+Table. DEGs annotation results
+</caption>
+<thead><tr>
+<th style="text-align:center;font-weight: bold;">
+chrom
+</th>
+<th style="text-align:center;font-weight: bold;">
+start
+</th>
+<th style="text-align:center;font-weight: bold;">
+end
+</th>
+<th style="text-align:center;font-weight: bold;">
+gene_id
+</th>
+<th style="text-align:center;font-weight: bold;">
+score
+</th>
+<th style="text-align:center;font-weight: bold;">
+strand
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr14
+</td>
+<td style="text-align:center;line-height: 2em;">
+12802589
+</td>
+<td style="text-align:center;line-height: 2em;">
+12807112
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF000031
+</td>
+<td style="text-align:center;line-height: 2em;">
+1.408356
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr14
+</td>
+<td style="text-align:center;line-height: 2em;">
+12979855
+</td>
+<td style="text-align:center;line-height: 2em;">
+12984114
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF000041
+</td>
+<td style="text-align:center;line-height: 2em;">
+-1.114777
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr14
+</td>
+<td style="text-align:center;line-height: 2em;">
+13092225
+</td>
+<td style="text-align:center;line-height: 2em;">
+13094734
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF000049
+</td>
+<td style="text-align:center;line-height: 2em;">
+1.271638
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr14
+</td>
+<td style="text-align:center;line-height: 2em;">
+13915421
+</td>
+<td style="text-align:center;line-height: 2em;">
+13919063
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF000066
+</td>
+<td style="text-align:center;line-height: 2em;">
+-6.180426
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr14
+</td>
+<td style="text-align:center;line-height: 2em;">
+15038730
+</td>
+<td style="text-align:center;line-height: 2em;">
+15050966
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF000091
+</td>
+<td style="text-align:center;line-height: 2em;">
+-1.250090
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+chr14
+</td>
+<td style="text-align:center;">
+15455652
+</td>
+<td style="text-align:center;">
+15456778
+</td>
+<td style="text-align:center;">
+HdF000106
+</td>
+<td style="text-align:center;">
+-6.085891
+</td>
+<td style="text-align:center;">
+<ul><li></ul>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level4">
 <h4 id="plot-genomic-feature-density-heatmap">Plot genomic feature density heatmap<a class="anchor" aria-label="anchor" href="#plot-genomic-feature-density-heatmap"></a>
@@ -489,14 +1218,166 @@ by chromosome<a class="anchor" aria-label="anchor" href="#plot-differentially-ex
 <span>  na.strings <span class="op">=</span> <span class="st">"NA"</span>,</span>
 <span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fst</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   CHROM BIN_START BIN_END N_VARIANTS WEIGHTED_FST    MEAN_FST</span></span>
-<span><span class="co">#&gt; 1 chr11     10001   20000          7   0.04366440  0.02391140</span></span>
-<span><span class="co">#&gt; 2 chr11     15001   25000          7   0.04366440  0.02391140</span></span>
-<span><span class="co">#&gt; 3 chr11     25001   35000          4   0.01503910  0.01619730</span></span>
-<span><span class="co">#&gt; 4 chr11     30001   40000          4   0.01503910  0.01619730</span></span>
-<span><span class="co">#&gt; 5 chr11     55001   65000          1  -0.00444874 -0.00444874</span></span>
-<span><span class="co">#&gt; 6 chr11     60001   70000          1  -0.00444874 -0.00444874</span></span></code></pre></div>
+<span><span class="co"># head(fst)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fst</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kbl</span><span class="op">(</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"Table. FST results from VCFtools"</span>, </span>
+<span>    escape <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>    align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span></span>
+<span>    <span class="st">"striped"</span>, </span>
+<span>    full_width <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    html_font <span class="op">=</span> <span class="st">"Times"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">0</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, extra_css <span class="op">=</span> <span class="st">"line-height: 2em;"</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic lightable-striped" style="font-family: Times; margin-left: auto; margin-right: auto;">
+<caption>
+Table. FST results from VCFtools
+</caption>
+<thead><tr>
+<th style="text-align:center;font-weight: bold;">
+CHROM
+</th>
+<th style="text-align:center;font-weight: bold;">
+BIN_START
+</th>
+<th style="text-align:center;font-weight: bold;">
+BIN_END
+</th>
+<th style="text-align:center;font-weight: bold;">
+N_VARIANTS
+</th>
+<th style="text-align:center;font-weight: bold;">
+WEIGHTED_FST
+</th>
+<th style="text-align:center;font-weight: bold;">
+MEAN_FST
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr11
+</td>
+<td style="text-align:center;line-height: 2em;">
+10001
+</td>
+<td style="text-align:center;line-height: 2em;">
+20000
+</td>
+<td style="text-align:center;line-height: 2em;">
+7
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0436644
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0239114
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr11
+</td>
+<td style="text-align:center;line-height: 2em;">
+15001
+</td>
+<td style="text-align:center;line-height: 2em;">
+25000
+</td>
+<td style="text-align:center;line-height: 2em;">
+7
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0436644
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0239114
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr11
+</td>
+<td style="text-align:center;line-height: 2em;">
+25001
+</td>
+<td style="text-align:center;line-height: 2em;">
+35000
+</td>
+<td style="text-align:center;line-height: 2em;">
+4
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0150391
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0161973
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr11
+</td>
+<td style="text-align:center;line-height: 2em;">
+30001
+</td>
+<td style="text-align:center;line-height: 2em;">
+40000
+</td>
+<td style="text-align:center;line-height: 2em;">
+4
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0150391
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0161973
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr11
+</td>
+<td style="text-align:center;line-height: 2em;">
+55001
+</td>
+<td style="text-align:center;line-height: 2em;">
+65000
+</td>
+<td style="text-align:center;line-height: 2em;">
+1
+</td>
+<td style="text-align:center;line-height: 2em;">
+-0.0044487
+</td>
+<td style="text-align:center;line-height: 2em;">
+-0.0044487
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+chr11
+</td>
+<td style="text-align:center;">
+60001
+</td>
+<td style="text-align:center;">
+70000
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+-0.0044487
+</td>
+<td style="text-align:center;">
+-0.0044487
+</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anno_fst_dmr.html">anno_fst_dmr</a></span><span class="op">(</span></span>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
@@ -510,21 +1391,204 @@ by chromosome<a class="anchor" aria-label="anchor" href="#plot-differentially-ex
 <span>  ignore_strand <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  features <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"promoter"</span>, <span class="st">"UTR5"</span>, <span class="st">"gene"</span>, <span class="st">"exon"</span>, <span class="st">"intron"</span>, <span class="st">"CDS"</span>, <span class="st">"UTR3"</span>, <span class="st">"intergenic"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span><span class="co">#&gt;   CHROM BIN_START BIN_END N_VARIANTS WEIGHTED_FST    MEAN_FST</span></span>
-<span><span class="co">#&gt; 1 chr11     10001   20000          7   0.04366440  0.02391140</span></span>
-<span><span class="co">#&gt; 2 chr11     15001   25000          7   0.04366440  0.02391140</span></span>
-<span><span class="co">#&gt; 3 chr11     25001   35000          4   0.01503910  0.01619730</span></span>
-<span><span class="co">#&gt; 4 chr11     30001   40000          4   0.01503910  0.01619730</span></span>
-<span><span class="co">#&gt; 5 chr11     55001   65000          1  -0.00444874 -0.00444874</span></span>
-<span><span class="co">#&gt; 6 chr11     60001   70000          1  -0.00444874 -0.00444874</span></span>
-<span><span class="co">#&gt;                                 anno_type                   gene_id</span></span>
-<span><span class="co">#&gt; 1 promoter,gene,UTR5,CDS,exon,intron,UTR3 HdF041849(p),HdF041849(g)</span></span>
-<span><span class="co">#&gt; 2          promoter,gene,UTR5,exon,intron HdF041849(p),HdF041849(g)</span></span>
-<span><span class="co">#&gt; 3                              intergenic                          </span></span>
-<span><span class="co">#&gt; 4                              intergenic                          </span></span>
-<span><span class="co">#&gt; 5                              intergenic                          </span></span>
-<span><span class="co">#&gt; 6                              intergenic</span></span></code></pre></div>
+<span><span class="co"># head(res)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kbl</span><span class="op">(</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"Table. FST annotation results"</span>, </span>
+<span>    escape <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>    align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span></span>
+<span>    <span class="st">"striped"</span>, </span>
+<span>    full_width <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    html_font <span class="op">=</span> <span class="st">"Times"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">0</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, extra_css <span class="op">=</span> <span class="st">"line-height: 2em;"</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic lightable-striped" style="font-family: Times; margin-left: auto; margin-right: auto;">
+<caption>
+Table. FST annotation results
+</caption>
+<thead><tr>
+<th style="text-align:center;font-weight: bold;">
+CHROM
+</th>
+<th style="text-align:center;font-weight: bold;">
+BIN_START
+</th>
+<th style="text-align:center;font-weight: bold;">
+BIN_END
+</th>
+<th style="text-align:center;font-weight: bold;">
+N_VARIANTS
+</th>
+<th style="text-align:center;font-weight: bold;">
+WEIGHTED_FST
+</th>
+<th style="text-align:center;font-weight: bold;">
+MEAN_FST
+</th>
+<th style="text-align:center;font-weight: bold;">
+anno_type
+</th>
+<th style="text-align:center;font-weight: bold;">
+gene_id
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr11
+</td>
+<td style="text-align:center;line-height: 2em;">
+10001
+</td>
+<td style="text-align:center;line-height: 2em;">
+20000
+</td>
+<td style="text-align:center;line-height: 2em;">
+7
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0436644
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0239114
+</td>
+<td style="text-align:center;line-height: 2em;">
+promoter,gene,UTR5,CDS,exon,intron,UTR3
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF041849(p),HdF041849(g)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr11
+</td>
+<td style="text-align:center;line-height: 2em;">
+15001
+</td>
+<td style="text-align:center;line-height: 2em;">
+25000
+</td>
+<td style="text-align:center;line-height: 2em;">
+7
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0436644
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0239114
+</td>
+<td style="text-align:center;line-height: 2em;">
+promoter,gene,UTR5,exon,intron
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF041849(p),HdF041849(g)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr11
+</td>
+<td style="text-align:center;line-height: 2em;">
+25001
+</td>
+<td style="text-align:center;line-height: 2em;">
+35000
+</td>
+<td style="text-align:center;line-height: 2em;">
+4
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0150391
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0161973
+</td>
+<td style="text-align:center;line-height: 2em;">
+intergenic
+</td>
+<td style="text-align:center;line-height: 2em;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr11
+</td>
+<td style="text-align:center;line-height: 2em;">
+30001
+</td>
+<td style="text-align:center;line-height: 2em;">
+40000
+</td>
+<td style="text-align:center;line-height: 2em;">
+4
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0150391
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0161973
+</td>
+<td style="text-align:center;line-height: 2em;">
+intergenic
+</td>
+<td style="text-align:center;line-height: 2em;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr11
+</td>
+<td style="text-align:center;line-height: 2em;">
+55001
+</td>
+<td style="text-align:center;line-height: 2em;">
+65000
+</td>
+<td style="text-align:center;line-height: 2em;">
+1
+</td>
+<td style="text-align:center;line-height: 2em;">
+-0.0044487
+</td>
+<td style="text-align:center;line-height: 2em;">
+-0.0044487
+</td>
+<td style="text-align:center;line-height: 2em;">
+intergenic
+</td>
+<td style="text-align:center;line-height: 2em;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+chr11
+</td>
+<td style="text-align:center;">
+60001
+</td>
+<td style="text-align:center;">
+70000
+</td>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;">
+-0.0044487
+</td>
+<td style="text-align:center;">
+-0.0044487
+</td>
+<td style="text-align:center;">
+intergenic
+</td>
+<td style="text-align:center;">
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level4">
 <h4 id="annotate-dmr-slide-windows-with-genomic-features">Annotate DMR slide windows with genomic features<a class="anchor" aria-label="anchor" href="#annotate-dmr-slide-windows-with-genomic-features"></a>
@@ -543,14 +1607,187 @@ by chromosome<a class="anchor" aria-label="anchor" href="#plot-differentially-ex
 <span>  na.strings <span class="op">=</span> <span class="st">"NA"</span>,</span>
 <span>  stringsAsFactors <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dmr</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    chr   start     end strand        pvalue        qvalue meth.diff</span></span>
-<span><span class="co">#&gt; 1 chr1  466001  468000      *  4.157118e-03  1.206712e-02 -27.31707</span></span>
-<span><span class="co">#&gt; 2 chr1  660001  662000      *  4.041133e-09  3.622605e-08 -33.37925</span></span>
-<span><span class="co">#&gt; 3 chr1 1454001 1456000      *  8.939178e-12  1.083862e-10 -26.55631</span></span>
-<span><span class="co">#&gt; 4 chr1 2750001 2752000      * 2.716109e-129 5.710428e-127  25.04745</span></span>
-<span><span class="co">#&gt; 5 chr1 3428001 3430000      *  2.049072e-10  2.144328e-09 -46.33124</span></span>
-<span><span class="co">#&gt; 6 chr1 3604001 3606000      *  2.137854e-09  1.984104e-08  37.85743</span></span></code></pre></div>
+<span><span class="co"># head(dmr)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dmr</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kbl</span><span class="op">(</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"Table. DMR results from MethylKit"</span>, </span>
+<span>    escape <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>    align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span></span>
+<span>    <span class="st">"striped"</span>, </span>
+<span>    full_width <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    html_font <span class="op">=</span> <span class="st">"Times"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">0</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, extra_css <span class="op">=</span> <span class="st">"line-height: 2em;"</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic lightable-striped" style="font-family: Times; margin-left: auto; margin-right: auto;">
+<caption>
+Table. DMR results from MethylKit
+</caption>
+<thead><tr>
+<th style="text-align:center;font-weight: bold;">
+chr
+</th>
+<th style="text-align:center;font-weight: bold;">
+start
+</th>
+<th style="text-align:center;font-weight: bold;">
+end
+</th>
+<th style="text-align:center;font-weight: bold;">
+strand
+</th>
+<th style="text-align:center;font-weight: bold;">
+pvalue
+</th>
+<th style="text-align:center;font-weight: bold;">
+qvalue
+</th>
+<th style="text-align:center;font-weight: bold;">
+meth.diff
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr1
+</td>
+<td style="text-align:center;line-height: 2em;">
+466001
+</td>
+<td style="text-align:center;line-height: 2em;">
+468000
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0041571
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0120671
+</td>
+<td style="text-align:center;line-height: 2em;">
+-27.31707
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr1
+</td>
+<td style="text-align:center;line-height: 2em;">
+660001
+</td>
+<td style="text-align:center;line-height: 2em;">
+662000
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+-33.37925
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr1
+</td>
+<td style="text-align:center;line-height: 2em;">
+1454001
+</td>
+<td style="text-align:center;line-height: 2em;">
+1456000
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+-26.55631
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr1
+</td>
+<td style="text-align:center;line-height: 2em;">
+2750001
+</td>
+<td style="text-align:center;line-height: 2em;">
+2752000
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+25.04745
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr1
+</td>
+<td style="text-align:center;line-height: 2em;">
+3428001
+</td>
+<td style="text-align:center;line-height: 2em;">
+3430000
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+-46.33124
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+chr1
+</td>
+<td style="text-align:center;">
+3604001
+</td>
+<td style="text-align:center;">
+3606000
+</td>
+<td style="text-align:center;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;">
+0.0000000
+</td>
+<td style="text-align:center;">
+0.0000000
+</td>
+<td style="text-align:center;">
+37.85743
+</td>
+</tr>
+</tbody>
+</table>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/anno_fst_dmr.html">anno_fst_dmr</a></span><span class="op">(</span></span>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
@@ -564,21 +1801,228 @@ by chromosome<a class="anchor" aria-label="anchor" href="#plot-differentially-ex
 <span>  ignore_strand <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  features <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"promoter"</span>, <span class="st">"UTR5"</span>, <span class="st">"gene"</span>, <span class="st">"exon"</span>, <span class="st">"intron"</span>, <span class="st">"CDS"</span>, <span class="st">"UTR3"</span>, <span class="st">"intergenic"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    chr   start     end strand        pvalue        qvalue meth.diff</span></span>
-<span><span class="co">#&gt; 1 chr1  466001  468000      *  4.157118e-03  1.206712e-02 -27.31707</span></span>
-<span><span class="co">#&gt; 2 chr1  660001  662000      *  4.041133e-09  3.622605e-08 -33.37925</span></span>
-<span><span class="co">#&gt; 3 chr1 1454001 1456000      *  8.939178e-12  1.083862e-10 -26.55631</span></span>
-<span><span class="co">#&gt; 4 chr1 2750001 2752000      * 2.716109e-129 5.710428e-127  25.04745</span></span>
-<span><span class="co">#&gt; 5 chr1 3428001 3430000      *  2.049072e-10  2.144328e-09 -46.33124</span></span>
-<span><span class="co">#&gt; 6 chr1 3604001 3606000      *  2.137854e-09  1.984104e-08  37.85743</span></span>
-<span><span class="co">#&gt;        anno_type      gene_id</span></span>
-<span><span class="co">#&gt; 1    gene,intron HdF051575(g)</span></span>
-<span><span class="co">#&gt; 2    gene,intron HdF051575(g)</span></span>
-<span><span class="co">#&gt; 3 gene,exon,UTR3 HdF027216(g)</span></span>
-<span><span class="co">#&gt; 4     intergenic             </span></span>
-<span><span class="co">#&gt; 5    gene,intron HdF027234(g)</span></span>
-<span><span class="co">#&gt; 6    gene,intron HdF027242(g)</span></span></code></pre></div>
+<span><span class="co"># head(res)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kbl</span><span class="op">(</span></span>
+<span>    caption <span class="op">=</span> <span class="st">"Table. DMR annotation results"</span>, </span>
+<span>    escape <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>    align <span class="op">=</span> <span class="st">"c"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">kable_classic</span><span class="op">(</span></span>
+<span>    <span class="st">"striped"</span>, </span>
+<span>    full_width <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>    html_font <span class="op">=</span> <span class="st">"Times"</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">0</span>, bold <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
+<span>  <span class="fu">row_spec</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, extra_css <span class="op">=</span> <span class="st">"line-height: 2em;"</span><span class="op">)</span></span></code></pre></div>
+<table class="table  lightable-classic lightable-striped" style="font-family: Times; margin-left: auto; margin-right: auto;">
+<caption>
+Table. DMR annotation results
+</caption>
+<thead><tr>
+<th style="text-align:center;font-weight: bold;">
+chr
+</th>
+<th style="text-align:center;font-weight: bold;">
+start
+</th>
+<th style="text-align:center;font-weight: bold;">
+end
+</th>
+<th style="text-align:center;font-weight: bold;">
+strand
+</th>
+<th style="text-align:center;font-weight: bold;">
+pvalue
+</th>
+<th style="text-align:center;font-weight: bold;">
+qvalue
+</th>
+<th style="text-align:center;font-weight: bold;">
+meth.diff
+</th>
+<th style="text-align:center;font-weight: bold;">
+anno_type
+</th>
+<th style="text-align:center;font-weight: bold;">
+gene_id
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr1
+</td>
+<td style="text-align:center;line-height: 2em;">
+466001
+</td>
+<td style="text-align:center;line-height: 2em;">
+468000
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0041571
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0120671
+</td>
+<td style="text-align:center;line-height: 2em;">
+-27.31707
+</td>
+<td style="text-align:center;line-height: 2em;">
+gene,intron
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF051575(g)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr1
+</td>
+<td style="text-align:center;line-height: 2em;">
+660001
+</td>
+<td style="text-align:center;line-height: 2em;">
+662000
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+-33.37925
+</td>
+<td style="text-align:center;line-height: 2em;">
+gene,intron
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF051575(g)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr1
+</td>
+<td style="text-align:center;line-height: 2em;">
+1454001
+</td>
+<td style="text-align:center;line-height: 2em;">
+1456000
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+-26.55631
+</td>
+<td style="text-align:center;line-height: 2em;">
+gene,exon,UTR3
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF027216(g)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr1
+</td>
+<td style="text-align:center;line-height: 2em;">
+2750001
+</td>
+<td style="text-align:center;line-height: 2em;">
+2752000
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+25.04745
+</td>
+<td style="text-align:center;line-height: 2em;">
+intergenic
+</td>
+<td style="text-align:center;line-height: 2em;">
+</td>
+</tr>
+<tr>
+<td style="text-align:center;line-height: 2em;">
+chr1
+</td>
+<td style="text-align:center;line-height: 2em;">
+3428001
+</td>
+<td style="text-align:center;line-height: 2em;">
+3430000
+</td>
+<td style="text-align:center;line-height: 2em;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+0.0000000
+</td>
+<td style="text-align:center;line-height: 2em;">
+-46.33124
+</td>
+<td style="text-align:center;line-height: 2em;">
+gene,intron
+</td>
+<td style="text-align:center;line-height: 2em;">
+HdF027234(g)
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+chr1
+</td>
+<td style="text-align:center;">
+3604001
+</td>
+<td style="text-align:center;">
+3606000
+</td>
+<td style="text-align:center;">
+<ul><li></ul>
+</td>
+<td style="text-align:center;">
+0.0000000
+</td>
+<td style="text-align:center;">
+0.0000000
+</td>
+<td style="text-align:center;">
+37.85743
+</td>
+<td style="text-align:center;">
+gene,intron
+</td>
+<td style="text-align:center;">
+HdF027242(g)
+</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level4">
 <h4 id="plot-snp-density-at-chromosome-level">Plot SNP density at chromosome level<a class="anchor" aria-label="anchor" href="#plot-snp-density-at-chromosome-level"></a>
