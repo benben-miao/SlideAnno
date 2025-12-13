@@ -288,9 +288,26 @@
 <p><img src="reference/figures/README-plot_gene_structure-1.png" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
-<h3 id="plot-gene-structures-for-a-genomic-interval">Plot gene structures for a genomic interval<a class="anchor" aria-label="anchor" href="#plot-gene-structures-for-a-genomic-interval"></a>
+<h3 id="plot-protein-domains-from-ensembl">Plot protein domains from Ensembl<a class="anchor" aria-label="anchor" href="#plot-protein-domains-from-ensembl"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot TP53 domian</span></span>
+<span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/plot_gene_domains.html">plot_gene_domains</a></span><span class="op">(</span></span>
+<span>  gene_name <span class="op">=</span> <span class="st">"TP53"</span>,</span>
+<span>  species <span class="op">=</span> <span class="st">"hsapiens"</span>,</span>
+<span>  transcript_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  transcript_choice <span class="op">=</span> <span class="st">"longest"</span>,</span>
+<span>  palette <span class="op">=</span> <span class="st">"Set 2"</span>,</span>
+<span>  legend_ncol <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  return_data <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">res</span><span class="op">$</span><span class="va">plot</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot_gene_domains-1.png" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level3">
+<h3 id="plot-gene-structures-for-a-genomic-interval">Plot gene structures for a genomic interval<a class="anchor" aria-label="anchor" href="#plot-gene-structures-for-a-genomic-interval"></a>
+</h3>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot interval structure</span></span>
 <span><span class="fu"><a href="reference/plot_interval_structure.html">plot_interval_structure</a></span><span class="op">(</span></span>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
@@ -317,7 +334,7 @@
 <div class="section level3">
 <h3 id="plot-interval-flank-structure-around-a-focal-gene">Plot interval flank structure around a focal gene<a class="anchor" aria-label="anchor" href="#plot-interval-flank-structure-around-a-focal-gene"></a>
 </h3>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Neighborhood around a focal gene on its chromosome</span></span>
 <span><span class="fu"><a href="reference/plot_interval_flank.html">plot_interval_flank</a></span><span class="op">(</span></span>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
@@ -339,7 +356,7 @@
 <div class="section level3">
 <h3 id="plot-chromosome-structures-and-gene-stats">Plot chromosome structures and gene stats<a class="anchor" aria-label="anchor" href="#plot-chromosome-structures-and-gene-stats"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot chrom structure</span></span>
 <span><span class="fu"><a href="reference/plot_chrom_structure.html">plot_chrom_structure</a></span><span class="op">(</span></span>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
@@ -358,7 +375,7 @@
 <div class="section level3">
 <h3 id="plot-chromosome-structures-and-gene-annotation">Plot chromosome structures and gene annotation<a class="anchor" aria-label="anchor" href="#plot-chromosome-structures-and-gene-annotation"></a>
 </h3>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">genes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  gene_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"HdF029609"</span>, <span class="st">"HdF029610"</span><span class="op">)</span>,</span>
 <span>  gene_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"GeneA"</span>, <span class="st">"GeneB"</span><span class="op">)</span><span class="op">)</span></span>
@@ -371,6 +388,22 @@
 <span>  orientation <span class="op">=</span> <span class="st">"vertical"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_chrom_genes-1.png" style="display: block; margin: auto;"></p>
 </div>
+<div class="section level3">
+<h3 id="plot-genomic-feature-density-heatmap">Plot genomic feature density heatmap<a class="anchor" aria-label="anchor" href="#plot-genomic-feature-density-heatmap"></a>
+</h3>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Gene density heatmap</span></span>
+<span><span class="fu"><a href="reference/plot_chrom_heatmap.html">plot_chrom_heatmap</a></span><span class="op">(</span></span>
+<span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
+<span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span>
+<span>  feature <span class="op">=</span> <span class="st">"gene"</span>,</span>
+<span>  bin_size <span class="op">=</span> <span class="fl">1e6</span>,</span>
+<span>  orientation <span class="op">=</span> <span class="st">"horizontal"</span>,</span>
+<span>  palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#ffffff"</span>, <span class="st">"#0055aa"</span><span class="op">)</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fl">0.9</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot_chrom_heatmap-1.png" style="display: block; margin: auto;"></p>
+</div>
 </div>
 <div class="section level2">
 <h2 id="id_6-deg-anno--viz">6. DEG Anno &amp; Viz<a class="anchor" aria-label="anchor" href="#id_6-deg-anno--viz"></a>
@@ -378,7 +411,7 @@
 <div class="section level3">
 <h3 id="annotate-differentially-expressed-genes-degs-with-chromosome-positions">Annotate differentially expressed genes (DEGs) with chromosome positions<a class="anchor" aria-label="anchor" href="#annotate-differentially-expressed-genes-degs-with-chromosome-positions"></a>
 </h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example DEGs GAnnoViz</span></span>
 <span><span class="va">deg_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
 <span>  <span class="st">"extdata"</span>,</span>
@@ -407,7 +440,7 @@
 <span><span class="co">#&gt; 4 2.832689e-05</span></span>
 <span><span class="co">#&gt; 5 4.406169e-01</span></span>
 <span><span class="co">#&gt; 6 4.865774e-01</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Annotate DEGs with chromosome positions</span></span>
 <span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/anno_deg_chrom.html">anno_deg_chrom</a></span><span class="op">(</span></span>
 <span>  deg_file <span class="op">=</span> <span class="va">deg_file</span>,</span>
@@ -428,27 +461,11 @@
 <span><span class="co">#&gt; 6 chr14 15455652 15456778 HdF000106 -6.085891      *</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="plot-genomic-feature-density-heatmap">Plot genomic feature density heatmap<a class="anchor" aria-label="anchor" href="#plot-genomic-feature-density-heatmap"></a>
-</h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Gene density heatmap</span></span>
-<span><span class="fu"><a href="reference/plot_chrom_heatmap.html">plot_chrom_heatmap</a></span><span class="op">(</span></span>
-<span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
-<span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span>
-<span>  feature <span class="op">=</span> <span class="st">"gene"</span>,</span>
-<span>  bin_size <span class="op">=</span> <span class="fl">1e6</span>,</span>
-<span>  orientation <span class="op">=</span> <span class="st">"horizontal"</span>,</span>
-<span>  palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#ffffff"</span>, <span class="st">"#0055aa"</span><span class="op">)</span>,</span>
-<span>  alpha <span class="op">=</span> <span class="fl">0.9</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-plot_chrom_heatmap-1.png" style="display: block; margin: auto;"></p>
-</div>
-<div class="section level3">
 <h3 id="plot-differentially-expressed-genes-degs-hyperhypo-distributions-by-chromosome">Plot differentially expressed genes (DEGs) hyper/hypo distributions by chromosome<a class="anchor" aria-label="anchor" href="#plot-differentially-expressed-genes-degs-hyperhypo-distributions-by-chromosome"></a>
 </h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot chrom DEGs</span></span>
-<span><span class="fu"><a href="reference/plot_chrom_deg.html">plot_chrom_deg</a></span><span class="op">(</span></span>
+<span><span class="fu"><a href="reference/plot_deg_chrom.html">plot_deg_chrom</a></span><span class="op">(</span></span>
 <span>  deg_file <span class="op">=</span> <span class="va">deg_file</span>,</span>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span>
@@ -462,7 +479,30 @@
 <span>  hyper_color <span class="op">=</span> <span class="st">"#ff000088"</span>,</span>
 <span>  hypo_color <span class="op">=</span> <span class="st">"#00880088"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-plot_chrom_deg-1.png" style="display: block; margin: auto;"></p>
+<p><img src="reference/figures/README-plot_deg_chrom-1.png" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level3">
+<h3 id="plot-degs-updown-along-chromosomes">Plot DEGs up/down along chromosomes<a class="anchor" aria-label="anchor" href="#plot-degs-updown-along-chromosomes"></a>
+</h3>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/plot_deg_exp.html">plot_deg_exp</a></span><span class="op">(</span></span>
+<span>  deg_file <span class="op">=</span> <span class="va">deg_file</span>,</span>
+<span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
+<span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span>
+<span>  id_col <span class="op">=</span> <span class="st">"GeneID"</span>,</span>
+<span>  fc_col <span class="op">=</span> <span class="st">"log2FoldChange"</span>,</span>
+<span>  orientation <span class="op">=</span> <span class="st">"horizontal"</span>,</span>
+<span>  chrom_alpha <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  chrom_color <span class="op">=</span> <span class="st">"#008888"</span>,</span>
+<span>  bar_height <span class="op">=</span> <span class="fl">0.8</span>,</span>
+<span>  point_size <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  point_alpha <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>  up_color <span class="op">=</span> <span class="st">"#ff0000"</span>,</span>
+<span>  down_color <span class="op">=</span> <span class="st">"#008800"</span>,</span>
+<span>  mark_style <span class="op">=</span> <span class="st">"point"</span>,</span>
+<span>  line_width <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>  line_height <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot_deg_exp-1.png" style="display: block; margin: auto;"></p>
 </div>
 </div>
 <div class="section level2">
@@ -471,7 +511,7 @@
 <div class="section level3">
 <h3 id="annotate-fst-slide-windows-with-genomic-features">Annotate FST slide windows with genomic features<a class="anchor" aria-label="anchor" href="#annotate-fst-slide-windows-with-genomic-features"></a>
 </h3>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Annotate FST</span></span>
 <span><span class="va">fst_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
 <span>    <span class="st">"extdata"</span>,</span>
@@ -493,7 +533,7 @@
 <span><span class="co">#&gt; 4 chr11     30001   40000          4   0.01503910  0.01619730</span></span>
 <span><span class="co">#&gt; 5 chr11     55001   65000          1  -0.00444874 -0.00444874</span></span>
 <span><span class="co">#&gt; 6 chr11     60001   70000          1  -0.00444874 -0.00444874</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/anno_fst_dmr.html">anno_fst_dmr</a></span><span class="op">(</span></span>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span>
@@ -525,7 +565,7 @@
 <div class="section level3">
 <h3 id="annotate-dmr-slide-windows-with-genomic-features">Annotate DMR slide windows with genomic features<a class="anchor" aria-label="anchor" href="#annotate-dmr-slide-windows-with-genomic-features"></a>
 </h3>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Annotate DMR</span></span>
 <span><span class="va">dmr_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span></span>
 <span>    <span class="st">"extdata"</span>,</span>
@@ -547,7 +587,7 @@
 <span><span class="co">#&gt; 4 chr1 2750001 2752000      * 2.716109e-129 5.710428e-127  25.04745</span></span>
 <span><span class="co">#&gt; 5 chr1 3428001 3430000      *  2.049072e-10  2.144328e-09 -46.33124</span></span>
 <span><span class="co">#&gt; 6 chr1 3604001 3606000      *  2.137854e-09  1.984104e-08  37.85743</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/anno_fst_dmr.html">anno_fst_dmr</a></span><span class="op">(</span></span>
 <span>  gff_file <span class="op">=</span> <span class="va">gff_file</span>,</span>
 <span>  format <span class="op">=</span> <span class="st">"auto"</span>,</span>
@@ -579,7 +619,7 @@
 <div class="section level3">
 <h3 id="plot-snp-density-at-chromosome-level">Plot SNP density at chromosome level<a class="anchor" aria-label="anchor" href="#plot-snp-density-at-chromosome-level"></a>
 </h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot SNP density</span></span>
 <span><span class="fu"><a href="reference/plot_snp_density.html">plot_snp_density</a></span><span class="op">(</span></span>
 <span>  fst_file <span class="op">=</span> <span class="va">fst_table</span>,</span>
@@ -592,7 +632,7 @@
 <div class="section level3">
 <h3 id="plot-genomic-weighted-fst-heatmap">Plot genomic weighted FST heatmap<a class="anchor" aria-label="anchor" href="#plot-genomic-weighted-fst-heatmap"></a>
 </h3>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot weighted FST</span></span>
 <span><span class="fu"><a href="reference/plot_snp_fst.html">plot_snp_fst</a></span><span class="op">(</span></span>
 <span>  fst_file <span class="op">=</span> <span class="va">fst_table</span>,</span>
@@ -607,7 +647,7 @@
 <div class="section level3">
 <h3 id="plot-genomic-fst-with-top-n-gene-annotations">Plot genomic FST with Top-N gene annotations<a class="anchor" aria-label="anchor" href="#plot-genomic-fst-with-top-n-gene-annotations"></a>
 </h3>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Chromosome FST with Top-20 gene annotations on chr11</span></span>
 <span><span class="fu"><a href="reference/plot_snp_anno.html">plot_snp_anno</a></span><span class="op">(</span></span>
 <span>  fst_file <span class="op">=</span> <span class="va">fst_table</span>,</span>
@@ -634,7 +674,7 @@
 <div class="section level3">
 <h3 id="plot-differentially-methylated-regions-dmrs-hyperhypo-distributions-by-chromosome">Plot differentially methylated regions (DMRs) hyper/hypo distributions by chromosome<a class="anchor" aria-label="anchor" href="#plot-differentially-methylated-regions-dmrs-hyperhypo-distributions-by-chromosome"></a>
 </h3>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot chrom DMRs</span></span>
 <span><span class="fu"><a href="reference/plot_dmg_chrom.html">plot_dmg_chrom</a></span><span class="op">(</span></span>
 <span>  dmr_file <span class="op">=</span> <span class="va">dmr_table</span>,</span>
@@ -649,9 +689,28 @@
 <p><img src="reference/figures/README-plot_chrom_dmr-1.png" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
+<h3 id="plot-dmgs-hyperhypo-along-chromosomes">Plot DMGs hyper/hypo along chromosomes<a class="anchor" aria-label="anchor" href="#plot-dmgs-hyperhypo-along-chromosomes"></a>
+</h3>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot DMG expression</span></span>
+<span><span class="fu"><a href="reference/plot_dmg_exp.html">plot_dmg_exp</a></span><span class="op">(</span></span>
+<span>  dmr_file <span class="op">=</span> <span class="va">dmr_table</span>,</span>
+<span>  orientation <span class="op">=</span> <span class="st">"horizontal"</span>,</span>
+<span>  chrom_alpha <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>  chrom_color <span class="op">=</span> <span class="st">"#008888"</span>,</span>
+<span>  point_size <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  point_alpha <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>  hyper_color <span class="op">=</span> <span class="st">"#ff0000"</span>,</span>
+<span>  hypo_color <span class="op">=</span> <span class="st">"#008800"</span>,</span>
+<span>  mark_style <span class="op">=</span> <span class="st">"line"</span>,</span>
+<span>  line_width <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>  line_height <span class="op">=</span> <span class="fl">0.8</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-plot_dmg_exp-1.png" style="display: block; margin: auto;"></p>
+</div>
+<div class="section level3">
 <h3 id="plot-chromosomal-dmgs-trend">Plot chromosomal DMGs trend<a class="anchor" aria-label="anchor" href="#plot-chromosomal-dmgs-trend"></a>
 </h3>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot DMR trend</span></span>
 <span><span class="fu"><a href="reference/plot_dmg_trend.html">plot_dmg_trend</a></span><span class="op">(</span></span>
 <span>  chrom_id <span class="op">=</span> <span class="st">"chr1"</span>,</span>

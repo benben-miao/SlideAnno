@@ -34,6 +34,9 @@ navbar:
           href: articles/Tutorial.html
 
 reference:
+  - title: Shinyapp
+    contents:
+      - GAnnoVizApp
   - title: Extract Features
     contents:
       - extract_promoters

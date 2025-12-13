@@ -6,7 +6,7 @@ distributions by chromosomes.
 ## Usage
 
 ``` r
-plot_chrom_deg(
+plot_deg_chrom(
   deg_file,
   gff_file,
   format = "auto",
@@ -92,7 +92,7 @@ gff_file <- system.file(
     package = "GAnnoViz")
 
 # Plot
-plot_chrom_deg(
+plot_deg_chrom(
   deg_file = deg_file,
   gff_file = gff_file,
   format = "auto",

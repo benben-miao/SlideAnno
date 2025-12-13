@@ -70,4 +70,5 @@ plot_dmg_trend(
   point_alpha = 0.5
 )
 #> `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+
 ```

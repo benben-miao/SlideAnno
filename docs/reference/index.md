@@ -1,5 +1,10 @@
 # Package index
 
+## Shinyapp
+
+- [`GAnnoVizApp()`](https://github.com/benben-miao/GAnnoViz/reference/GAnnoVizApp.md)
+  : Launch GAnnoViz Shiny application
+
 ## Extract Features
 
 - [`extract_promoters()`](https://github.com/benben-miao/GAnnoViz/reference/extract_promoters.md)
@@ -23,6 +28,8 @@
   : Plot gene stats for chromosomes
 - [`plot_gene_structure()`](https://github.com/benben-miao/GAnnoViz/reference/plot_gene_structure.md)
   : Plot gene structure (Promoter, 3'UTR, Exon, Intron, 5'UTR)
+- [`plot_gene_domains()`](https://github.com/benben-miao/GAnnoViz/reference/plot_gene_domains.md)
+  : Plot protein domains from Ensembl
 - [`plot_interval_structure()`](https://github.com/benben-miao/GAnnoViz/reference/plot_interval_structure.md)
   : Plot gene structures for a genomic interval
 - [`plot_interval_flank()`](https://github.com/benben-miao/GAnnoViz/reference/plot_interval_flank.md)
@@ -39,9 +46,11 @@
 - [`anno_deg_chrom()`](https://github.com/benben-miao/GAnnoViz/reference/anno_deg_chrom.md)
   : Annotate differentially expressed genes (DEGs) with chromosome
   positions
-- [`plot_chrom_deg()`](https://github.com/benben-miao/GAnnoViz/reference/plot_chrom_deg.md)
+- [`plot_deg_chrom()`](https://github.com/benben-miao/GAnnoViz/reference/plot_deg_chrom.md)
   : Plot differentially expressed genes (DEGs) hyper/hypo distributions
   by chromosome
+- [`plot_deg_exp()`](https://github.com/benben-miao/GAnnoViz/reference/plot_deg_exp.md)
+  : Plot DEGs up/down along chromosomes
 
 ## SNP Anno & Plot
 
@@ -61,5 +70,7 @@
 - [`plot_dmg_chrom()`](https://github.com/benben-miao/GAnnoViz/reference/plot_dmg_chrom.md)
   : Plot differentially methylated regions (DMRs) hyper/hypo
   distributions by chromosome
+- [`plot_dmg_exp()`](https://github.com/benben-miao/GAnnoViz/reference/plot_dmg_exp.md)
+  : Plot DMGs hyper/hypo along chromosomes
 - [`plot_dmg_trend()`](https://github.com/benben-miao/GAnnoViz/reference/plot_dmg_trend.md)
   : Plot chromosomal DMGs trend

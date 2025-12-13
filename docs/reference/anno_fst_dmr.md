@@ -86,6 +86,22 @@ fst_table <- system.file(
     "example.fst",
     package = "GAnnoViz")
 
+fst <- read.table(
+  file = fst_table,
+  header = TRUE,
+  sep = "\t",
+  na.strings = NA,
+  stringsAsFactors = FALSE
+)
+head(fst)
+#>   CHROM BIN_START BIN_END N_VARIANTS WEIGHTED_FST    MEAN_FST
+#> 1 chr11     10001   20000          7   0.04366440  0.02391140
+#> 2 chr11     15001   25000          7   0.04366440  0.02391140
+#> 3 chr11     25001   35000          4   0.01503910  0.01619730
+#> 4 chr11     30001   40000          4   0.01503910  0.01619730
+#> 5 chr11     55001   65000          1  -0.00444874 -0.00444874
+#> 6 chr11     60001   70000          1  -0.00444874 -0.00444874
+
 res <- anno_fst_dmr(
   gff_file = gff_file,
   format = "auto",
@@ -125,6 +141,22 @@ dmr_table <- system.file(
     "extdata",
     "example.dmr",
     package = "GAnnoViz")
+
+dmr <- read.table(
+  file = dmr_table,
+  header = TRUE,
+  sep = "\t",
+  na.strings = NA,
+  stringsAsFactors = FALSE
+)
+head(dmr)
+#>    chr   start     end strand        pvalue        qvalue meth.diff
+#> 1 chr1  466001  468000      *  4.157118e-03  1.206712e-02 -27.31707
+#> 2 chr1  660001  662000      *  4.041133e-09  3.622605e-08 -33.37925
+#> 3 chr1 1454001 1456000      *  8.939178e-12  1.083862e-10 -26.55631
+#> 4 chr1 2750001 2752000      * 2.716109e-129 5.710428e-127  25.04745
+#> 5 chr1 3428001 3430000      *  2.049072e-10  2.144328e-09 -46.33124
+#> 6 chr1 3604001 3606000      *  2.137854e-09  1.984104e-08  37.85743
 
 res <- anno_fst_dmr(
   gff_file = gff_file,
