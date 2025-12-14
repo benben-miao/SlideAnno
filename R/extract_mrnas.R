@@ -13,7 +13,7 @@
 #' # Example GFF3 file in GAnnoViz
 #' gff_file <- system.file(
 #'   "extdata",
-#'   "example.gff",
+#'   "example.gff3.gz",
 #'   package = "GAnnoViz")
 #'
 #' # Extract mRNAs
@@ -22,13 +22,6 @@
 #'   format = "auto",
 #'   mrna_info = "all")
 #' mrnas
-#'
-#' # mRNA info: mrna_id
-#' mrna_id <- extract_mrnas(
-#'   gff_file = gff_file,
-#'   format = "auto",
-#'   mrna_info = "mrna_id")
-#' head(mrna_id)
 #'
 #' # mRNA info: mrna_range
 #' mrna_range <- extract_mrnas(

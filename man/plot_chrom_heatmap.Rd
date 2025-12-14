@@ -39,7 +39,7 @@ Plot genomic feature density \bold{\emph{heatmap}}.
 # Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
-  "example.gff",
+  "example.gff3.gz",
   package = "GAnnoViz")
 
 # Gene density heatmap

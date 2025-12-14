@@ -23,7 +23,7 @@ Extract \bold{\emph{Exons}} ranges from GFF or GTF.
 # Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
-  "example.gff",
+  "example.gff3.gz",
   package = "GAnnoViz")
 
 # Extract Exons

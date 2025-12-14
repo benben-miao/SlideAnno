@@ -130,6 +130,11 @@ ui <- bs4DashPage(
           text = "plot_deg_exp",
           icon = icon("r-project"),
           tabName = "plot_deg_exp"
+        ),
+        bs4SidebarMenuSubItem(
+          text = "plot_deg_volcano",
+          icon = icon("r-project"),
+          tabName = "plot_deg_volcano"
         )
       ),
       bs4SidebarMenuItem(
@@ -197,11 +202,12 @@ ui <- bs4DashPage(
             	color: #333333;
             	font-weight: bold;
             }
-            .shiny-input-number {
-              border-radius: 10px;
+            .form-control, .selectize-input, .shiny-input-number, .shiny-input-select, .custom-file-input, .custom-file-label {
+              border-radius: 10px !important;
+              background-color: #f7f7f7 !important;
             }
-            .shiny-input-select {
-              border-radius: 10px;
+            .irs-line, .irs-bar, .irs-handle {
+              border-radius: 10px !important;
             }
           "
         )
@@ -345,6 +351,13 @@ ui <- bs4DashPage(
               icon = icon("circle-play"),
               style = "width: 100%",
               class = "btn-block"
+            ),
+            downloadButton(
+              outputId = "download_table_anno_deg_chrom",
+              label = "Download",
+              icon = icon("download"),
+              style = "width: 100%",
+              class = "btn btn-success btn-block"
             ),
             br(),
             fileInput(inputId = "deg_file_anno", label = "DEG table"),
@@ -1057,6 +1070,13 @@ ui <- bs4DashPage(
               style = "width: 100%",
               class = "btn-block"
             ),
+            downloadButton(
+              outputId = "download_plot_deg_chrom",
+              label = "Download",
+              icon = icon("download"),
+              style = "width: 100%",
+              class = "btn btn-success btn-block"
+            ),
             br(),
             fileInput(inputId = "deg_file", label = "DEG table"),
             fileInput(inputId = "gff_file_deg", label = "GFF/GTF file"),
@@ -1121,6 +1141,33 @@ ui <- bs4DashPage(
               inputId = "hypo_color_deg",
               label = "Hypo color",
               value = "#00880088"
+            ),
+            numericInput(
+              inputId = "plot_width_deg_chrom",
+              label = "Width (in)",
+              value = 10,
+              min = 1,
+              step = 0.5
+            ),
+            numericInput(
+              inputId = "plot_height_deg_chrom",
+              label = "Height (in)",
+              value = 6,
+              min = 1,
+              step = 0.5
+            ),
+            numericInput(
+              inputId = "plot_dpi_deg_chrom",
+              label = "DPI",
+              value = 300,
+              min = 72,
+              step = 10
+            ),
+            selectInput(
+              inputId = "plot_format_deg_chrom",
+              label = "Format",
+              choices = c("pdf", "jpeg"),
+              selected = "pdf"
             )
           )
         ), column(
@@ -1150,6 +1197,13 @@ ui <- bs4DashPage(
               icon = icon("circle-play"),
               style = "width: 100%",
               class = "btn-block"
+            ),
+            downloadButton(
+              outputId = "download_plot_deg_exp",
+              label = "Download",
+              icon = icon("download"),
+              style = "width: 100%",
+              class = "btn btn-success btn-block"
             ),
             br(),
             fileInput(inputId = "deg_file_exp", label = "DEG table"),
@@ -1240,6 +1294,33 @@ ui <- bs4DashPage(
               value = 0.8,
               min = 0.1,
               step = 0.1
+            ),
+            numericInput(
+              inputId = "plot_width_deg_exp",
+              label = "Width (in)",
+              value = 10,
+              min = 1,
+              step = 0.5
+            ),
+            numericInput(
+              inputId = "plot_height_deg_exp",
+              label = "Height (in)",
+              value = 6,
+              min = 1,
+              step = 0.5
+            ),
+            numericInput(
+              inputId = "plot_dpi_deg_exp",
+              label = "DPI",
+              value = 300,
+              min = 72,
+              step = 10
+            ),
+            selectInput(
+              inputId = "plot_format_deg_exp",
+              label = "Format",
+              choices = c("pdf", "jpeg"),
+              selected = "pdf"
             )
           )
         ), column(
@@ -1250,6 +1331,130 @@ ui <- bs4DashPage(
             solidHeader = TRUE,
             width = 12,
             plotOutput("plot_deg_exp", height = "600px")
+          )
+        )
+      )),
+
+      bs4TabItem(tabName = "plot_deg_volcano", fluidRow(
+        column(
+          width = 3,
+          bs4Card(
+            title = "Parameters",
+            status = "info",
+            solidHeader = TRUE,
+            width = 12,
+            actionButton(
+              inputId = "run_plot_deg_volcano",
+              label = "Run",
+              icon = icon("circle-play"),
+              style = "width: 100%",
+              class = "btn-block"
+            ),
+            downloadButton(
+              outputId = "download_plot_deg_volcano",
+              label = "Download",
+              icon = icon("download"),
+              style = "width: 100%",
+              class = "btn btn-success btn-block"
+            ),
+            br(),
+            fileInput(inputId = "deg_file_volcano", label = "DEG table"),
+            textInput(
+              inputId = "id_col_volcano",
+              label = "ID column",
+              value = "GeneID"
+            ),
+            textInput(
+              inputId = "fc_col_volcano",
+              label = "FC column",
+              value = "log2FoldChange"
+            ),
+            textInput(
+              inputId = "sig_col_volcano",
+              label = "Sig column",
+              value = "padj"
+            ),
+            numericInput(
+              inputId = "fc_threshold_volcano",
+              label = "FC threshold",
+              value = 1,
+              min = 0,
+              step = 0.1
+            ),
+            numericInput(
+              inputId = "sig_threshold_volcano",
+              label = "Sig threshold",
+              value = 0.05,
+              min = 0,
+              max = 1,
+              step = 0.01
+            ),
+            numericInput(
+              inputId = "point_size_volcano",
+              label = "Point size",
+              value = 1.5,
+              min = 0.5,
+              step = 0.5
+            ),
+            sliderInput(
+              inputId = "point_alpha_volcano",
+              label = "Point alpha",
+              min = 0,
+              max = 1,
+              value = 0.6,
+              step = 0.05
+            ),
+            textInput(
+              inputId = "up_color_volcano",
+              label = "Up color",
+              value = "#ff0000"
+            ),
+            textInput(
+              inputId = "down_color_volcano",
+              label = "Down color",
+              value = "#008800"
+            ),
+            textInput(
+              inputId = "ns_color_volcano",
+              label = "NS color",
+              value = "#999999"
+            ),
+            numericInput(
+              inputId = "plot_width_deg_volcano",
+              label = "Width (in)",
+              value = 10,
+              min = 1,
+              step = 0.5
+            ),
+            numericInput(
+              inputId = "plot_height_deg_volcano",
+              label = "Height (in)",
+              value = 6,
+              min = 1,
+              step = 0.5
+            ),
+            numericInput(
+              inputId = "plot_dpi_deg_volcano",
+              label = "DPI",
+              value = 300,
+              min = 72,
+              step = 10
+            ),
+            selectInput(
+              inputId = "plot_format_deg_volcano",
+              label = "Format",
+              choices = c("pdf", "jpeg"),
+              selected = "pdf"
+            )
+          )
+        ), column(
+          width = 9,
+          bs4Card(
+            title = "Plot",
+            status = "danger",
+            solidHeader = TRUE,
+            width = 12,
+            plotOutput("plot_deg_volcano", height = "600px")
           )
         )
       )),
@@ -2118,12 +2323,12 @@ server <- function(input, output, session) {
   observeEvent(TRUE, {
     updateTabItems(session, "main_menu", "plot_interval_structure")
   }, ignoreInit = FALSE, once = TRUE)
-  
+
   getGff <- function(infile) {
     if (!is.null(infile))
       infile$datapath
     else
-      system.file("extdata", "example.gff", package = "GAnnoViz")
+      system.file("extdata", "example.gff3.gz", package = "GAnnoViz")
   }
   getDeg <- function(infile) {
     if (!is.null(infile))
@@ -2146,8 +2351,8 @@ server <- function(input, output, session) {
   readGeneTable <- function(infile) {
     if (is.null(infile)) {
       data.frame(
-        gene_id = c("HdF029609", "HdF029610"),
-        gene_name = c("GeneA", "GeneB"),
+        gene_id = c("ENSMUSG00000042414", "ENSMUSG00000025935", "ENSMUSG00000048701", "ENSMUSG00000035385"),
+        gene_name = c("Prdm14", "Tram1", "Ccdc6", "Ccl2"),
         stringsAsFactors = FALSE
       )
     } else {
@@ -2382,6 +2587,24 @@ server <- function(input, output, session) {
     req(plot_deg_chrom_ev())
     print(plot_deg_chrom_ev())
   })
+  output$download_plot_deg_chrom <- downloadHandler(
+    filename = function() {
+      fmt <- input$plot_format_deg_chrom
+      sprintf("plot_deg_chrom.%s", fmt)
+    },
+    content = function(file) {
+      p <- plot_deg_chrom_ev()
+      req(p)
+      ggplot2::ggsave(
+        filename = file,
+        plot = p,
+        width = input$plot_width_deg_chrom,
+        height = input$plot_height_deg_chrom,
+        dpi = input$plot_dpi_deg_chrom,
+        device = input$plot_format_deg_chrom
+      )
+    }
+  )
 
   plot_deg_exp_ev <- eventReactive(input$run_plot_deg_exp, {
     plot_deg_exp(
@@ -2407,6 +2630,62 @@ server <- function(input, output, session) {
     req(plot_deg_exp_ev())
     print(plot_deg_exp_ev())
   })
+  output$download_plot_deg_exp <- downloadHandler(
+    filename = function() {
+      fmt <- input$plot_format_deg_exp
+      sprintf("plot_deg_exp.%s", fmt)
+    },
+    content = function(file) {
+      p <- plot_deg_exp_ev()
+      req(p)
+      ggplot2::ggsave(
+        filename = file,
+        plot = p,
+        width = input$plot_width_deg_exp,
+        height = input$plot_height_deg_exp,
+        dpi = input$plot_dpi_deg_exp,
+        device = input$plot_format_deg_exp
+      )
+    }
+  )
+
+  plot_deg_volcano_ev <- eventReactive(input$run_plot_deg_volcano, {
+    plot_deg_volcano(
+      deg_file = getDeg(input$deg_file_volcano),
+      id_col = input$id_col_volcano,
+      fc_col = input$fc_col_volcano,
+      sig_col = input$sig_col_volcano,
+      fc_threshold = input$fc_threshold_volcano,
+      sig_threshold = input$sig_threshold_volcano,
+      point_size = input$point_size_volcano,
+      point_alpha = input$point_alpha_volcano,
+      up_color = input$up_color_volcano,
+      down_color = input$down_color_volcano,
+      ns_color = input$ns_color_volcano
+    )
+  })
+  output$plot_deg_volcano <- renderPlot({
+    req(plot_deg_volcano_ev())
+    print(plot_deg_volcano_ev())
+  })
+  output$download_plot_deg_volcano <- downloadHandler(
+    filename = function() {
+      fmt <- input$plot_format_deg_volcano
+      sprintf("plot_deg_volcano.%s", fmt)
+    },
+    content = function(file) {
+      p <- plot_deg_volcano_ev()
+      req(p)
+      ggplot2::ggsave(
+        filename = file,
+        plot = p,
+        width = input$plot_width_deg_volcano,
+        height = input$plot_height_deg_volcano,
+        dpi = input$plot_dpi_deg_volcano,
+        device = input$plot_format_deg_volcano
+      )
+    }
+  )
 
   plot_snp_fst_ev <- eventReactive(input$run_plot_snp_fst, {
     plot_snp_fst(
@@ -2576,6 +2855,14 @@ server <- function(input, output, session) {
       rownames = FALSE
     )
   })
+  output$download_table_anno_deg_chrom <- downloadHandler(
+    filename = function() sprintf("anno_deg_chrom.txt"),
+    content = function(file) {
+      df <- anno_deg_chrom_ev()
+      if (is.null(df)) df <- data.frame()
+      utils::write.table(df, file, sep = "\t", row.names = FALSE, quote = FALSE)
+    }
+  )
 
   plot_gene_domains_ev <- eventReactive(input$run_plot_gene_domains, {
     plot_gene_domains(

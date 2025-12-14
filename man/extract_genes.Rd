@@ -23,7 +23,7 @@ Extract \bold{\emph{genes}} information from GFF or GTF.
 # Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
-  "example.gff",
+  "example.gff3.gz",
   package = "GAnnoViz")
 
 # Extract Genes
@@ -32,13 +32,6 @@ genes <- extract_genes(
   format = "auto",
   gene_info = "all")
 genes
-
-# Gene info: gene_id
-gene_id <- extract_genes(
-  gff_file = gff_file,
-  format = "auto",
-  gene_info = "gene_id")
-head(gene_id)
 
 # Gene info: gene_range
 gene_range <- extract_genes(

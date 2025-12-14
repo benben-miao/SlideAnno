@@ -23,7 +23,7 @@ Extract \bold{\emph{5'UTR}} ranges from GFF or GTF.
 # Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
-  "example.gff",
+  "example.gff3.gz",
   package = "GAnnoViz")
 
 # Extract 5'UTR
@@ -32,13 +32,6 @@ utr5 <- extract_utr5(
   format = "auto",
   utr5_info = "all")
 utr5
-
-# 5'UTR info: utr5_id
-utr5_id <- extract_utr5(
-  gff_file = gff_file,
-  format = "auto",
-  utr5_info = "utr5_id")
-head(utr5_id)
 
 # 5'UTR info: utr5_range
 utr5_range <- extract_utr5(

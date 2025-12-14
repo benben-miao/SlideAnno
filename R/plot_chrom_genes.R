@@ -24,12 +24,12 @@
 #' # Example GFF3 file in GAnnoViz
 #' gff_file <- system.file(
 #'   "extdata",
-#'   "example.gff",
+#'   "example.gff3.gz",
 #'   package = "GAnnoViz")
 #'
 #' genes <- data.frame(
-#'   gene_id = c("HdF029609", "HdF029610"),
-#'   gene_name = c("GeneA", "GeneB"))
+#'   gene_id = c("ENSMUSG00000042414", "ENSMUSG00000025935", "ENSMUSG00000048701", "ENSMUSG00000035385"),
+#'   gene_name = c("Prdm14", "Tram1", "Ccdc6", "Ccl2"))
 #'
 #' # Vertical, annotate by name
 #' plot_chrom_genes(

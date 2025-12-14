@@ -72,7 +72,7 @@ Plot gene structures for a \bold{\emph{genomic interval}}.
 # Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
-  "example.gff",
+  "example.gff3.gz",
   package = "GAnnoViz")
 
 plot_interval_structure(

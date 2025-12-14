@@ -65,7 +65,7 @@ fst_file <- system.file(
 
 gff_file <- system.file(
   "extdata",
-  "example.gff",
+  "example.gff3.gz",
   package = "GAnnoViz")
 
 # Chromosome FST with Top-20 gene annotations on chr11

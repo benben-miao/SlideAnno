@@ -15,7 +15,7 @@
 #' # Example GFF3 file in GAnnoViz
 #' gff_file <- system.file(
 #'   "extdata",
-#'   "example.gff",
+#'   "example.gff3.gz",
 #'   package = "GAnnoViz")
 #'
 #' # Extract Promoters
@@ -26,15 +26,6 @@
 #'   downstream = 200,
 #'   promoter_info = "all")
 #' promoters
-#'
-#' # Promoter info: promoter_id
-#' promoter_id <- extract_promoters(
-#'   gff_file = gff_file,
-#'   format = "auto",
-#'   upstream = 2000,
-#'   downstream = 200,
-#'   promoter_info = "promoter_id")
-#' head(promoter_id)
 #'
 #' # Promoter info: promoter_range
 #' promoter_range <- extract_promoters(

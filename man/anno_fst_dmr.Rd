@@ -48,17 +48,17 @@ Annotate \bold{\emph{FST/DMR}} slide windows with \bold{\emph{genomic features}}
 # Example GFF3 file in GAnnoViz
 gff_file <- system.file(
   "extdata",
-  "example.gff",
+  "example.gff3.gz",
   package = "GAnnoViz")
 
 # Annotate FST
-fst_table <- system.file(
+fst_file <- system.file(
     "extdata",
     "example.fst",
     package = "GAnnoViz")
 
 fst <- read.table(
-	file = fst_table,
+	file = fst_file,
 	header = TRUE,
 	sep = "\t",
 	na.strings = NA,
@@ -69,7 +69,7 @@ head(fst)
 res <- anno_fst_dmr(
   gff_file = gff_file,
   format = "auto",
-  genomic_ranges = fst_table,
+  genomic_ranges = fst_file,
   chrom_col = "CHROM",
   start_col = "BIN_START",
   end_col = "BIN_END",
@@ -81,13 +81,13 @@ res <- anno_fst_dmr(
 head(res)
 
 # Annotate DMR
-dmr_table <- system.file(
+dmr_file <- system.file(
     "extdata",
     "example.dmr",
     package = "GAnnoViz")
 
 dmr <- read.table(
-	file = dmr_table,
+	file = dmr_file,
 	header = TRUE,
 	sep = "\t",
 	na.strings = NA,
@@ -98,7 +98,7 @@ head(dmr)
 res <- anno_fst_dmr(
   gff_file = gff_file,
   format = "auto",
-  genomic_ranges = dmr_table,
+  genomic_ranges = dmr_file,
   chrom_col = "chr",
   start_col = "start",
   end_col = "end",

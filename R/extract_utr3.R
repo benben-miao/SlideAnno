@@ -13,7 +13,7 @@
 #' # Example GFF3 file in GAnnoViz
 #' gff_file <- system.file(
 #'   "extdata",
-#'   "example.gff",
+#'   "example.gff3.gz",
 #'   package = "GAnnoViz")
 #'
 #' # Extract 3'UTR
@@ -22,13 +22,6 @@
 #'   format = "auto",
 #'   utr3_info = "all")
 #' utr3
-#'
-#' # 3'UTR info: utr3_id
-#' utr3_id <- extract_utr3(
-#'   gff_file = gff_file,
-#'   format = "auto",
-#'   utr3_info = "utr3_id")
-#' head(utr3_id)
 #'
 #' # 3'UTR info: utr3_range
 #' utr3_range <- extract_utr3(

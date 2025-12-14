@@ -72,7 +72,7 @@ deg_file <- system.file(
 # Genomic structure annotation
 gff_file <- system.file(
     "extdata",
-    "example.gff",
+    "example.gff3.gz",
     package = "GAnnoViz")
 
 # Plot DEGs along chromosomes

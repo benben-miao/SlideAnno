@@ -21,7 +21,7 @@
 #'
 #' gff_file <- system.file(
 #'   "extdata",
-#'   "example.gff",
+#'   "example.gff3.gz",
 #'   package = "GAnnoViz")
 #'
 #' # Annotate DEGs with chromosome positions
