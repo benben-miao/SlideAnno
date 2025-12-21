@@ -73,4 +73,6 @@ reference:
       - anno_fst_dmr
       - plot_dmg_chrom
       - plot_dmg_exp
+      - plot_dmg_manhattan
+      - plot_dmg_circos
       - plot_dmg_trend
