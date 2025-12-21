@@ -6,52 +6,28 @@
 \usage{
 plot_dmg_manhattan(
   dmr_file,
-  y_transform = c("none", "log2", "log10"),
+  gff_file,
+  format = "auto",
+  gene_table = NULL,
+  label_type = "name",
   label_col = NULL,
-  label_top_n = 10,
+  y_transform = "none",
+  chromosome_spacing = 1e+06,
   hyper_color = "#ff0000",
   hypo_color = "#008800",
   point_size = 1,
   point_alpha = 0.5,
+  label_top_n = 10,
   label_size = 3,
+  gap_frac = 0.04,
   connector_dx1 = NULL,
   connector_dx2 = NULL,
-  gap_frac = 0.04,
-  chromosome_spacing = 1e+06,
-  gff_file = NULL,
-  format = "auto",
-  gene_table = NULL,
-  label_type = c("name", "id"),
   connector_elbow = 0.8,
   connector_tilt_frac = 0.2
 )
 }
 \arguments{
 \item{dmr_file}{DEG table from \bold{\emph{MethylKit}} analysis.}
-
-\item{y_transform}{Y-axis transformation for \code{meth.diff}. (\bold{\emph{"none"}}, "log2", "log10"). Log transform uses \code{sign(x) * log(1 + abs(x), base)}.}
-
-\item{label_col}{Column name used for annotation labels. If \code{NULL}, uses \code{chr:start-end}.}
-
-\item{label_top_n}{Number of top positive and top negative DMGs to label. (\bold{\emph{10}}).}
-
-\item{hyper_color}{Color for hyper-methylated points. (\bold{\emph{"#ff0000"}}).}
-
-\item{hypo_color}{Color for hypo-methylated points. (\bold{\emph{"#008800"}}).}
-
-\item{point_size}{Point size. (\bold{\emph{1}}).}
-
-\item{point_alpha}{Point alpha. (\bold{\emph{0.5}}).}
-
-\item{label_size}{Text size for labels. (\bold{\emph{3}}).}
-
-\item{connector_dx1}{First connector horizontal offset (bp). Default adapts to genome size.}
-
-\item{connector_dx2}{Second connector horizontal offset (bp). Default adapts to genome size.}
-
-\item{gap_frac}{Minimum vertical gap between labels (fraction of y-range). (\bold{\emph{0.04}}).}
-
-\item{chromosome_spacing}{Gap width (bp) inserted between chromosomes on x-axis. (\bold{\emph{1e6}}).}
 
 \item{gff_file}{Genomic structural annotation \bold{\file{GFF3/GTF}} file path. If provided and \code{label_col} is \code{NULL}, will try to label by overlapped/nearest \code{gene_id}.}
 
@@ -61,15 +37,39 @@ plot_dmg_manhattan(
 
 \item{label_type}{Label by gene name or gene id. (\bold{\emph{"name"}}, "id"). If \code{"name"} but no gene names can be inferred from \code{gff_file}, please provide \code{gene_table}.}
 
+\item{label_col}{Column name used for annotation labels. If \code{NULL}, uses \code{chr:start-end}.}
+
+\item{y_transform}{Y-axis transformation for \code{meth.diff}. (\bold{\emph{"none"}}, "log2", "log10").}
+
+\item{chromosome_spacing}{Gap width (bp) inserted between chromosomes on x-axis. (\bold{\emph{1e6}}).}
+
+\item{hyper_color}{Color for hyper-methylated points. (\bold{\emph{"#ff0000"}}).}
+
+\item{hypo_color}{Color for hypo-methylated points. (\bold{\emph{"#008800"}}).}
+
+\item{point_size}{Point size. (\bold{\emph{1}}).}
+
+\item{point_alpha}{Point alpha. (\bold{\emph{0.5}}).}
+
+\item{label_top_n}{Number of top positive and top negative DMGs to label. (\bold{\emph{10}}).}
+
+\item{label_size}{Text size for labels. (\bold{\emph{3}}).}
+
+\item{gap_frac}{Minimum vertical gap between labels (fraction of y-range). (\bold{\emph{0.04}}).}
+
+\item{connector_dx1}{First connector horizontal offset (bp). Default adapts to genome size.}
+
+\item{connector_dx2}{Second connector horizontal offset (bp). Default adapts to genome size.}
+
 \item{connector_elbow}{Scale factor applied to \code{connector_dx2}. (\bold{\emph{0.8}}).}
 
 \item{connector_tilt_frac}{Tilt amplitude for the second connector segment as a fraction of \code{gap_frac}. (\bold{\emph{0.2}}).}
 }
 \value{
-A \bold{\emph{ggplot object}} of DMG manhattan plot.
+A \bold{\emph{ggplot}} object of DMG manhattan plot.
 }
 \description{
-Plot genome-wide \bold{\emph{DMGs}} as a manhattan-style scatter plot, using chromosomes on x-axis and \code{meth.diff} on y-axis.
+Plot genome-wide DMGs \bold{\emph{manhattan}}.
 }
 \examples{
 dmr_file <- system.file(
@@ -77,14 +77,31 @@ dmr_file <- system.file(
   "example.dmr",
   package = "GAnnoViz")
 
+gff_file <- system.file(
+  "extdata",
+  "example.gff3.gz",
+  package = "GAnnoViz")
+
 plot_dmg_manhattan(
   dmr_file = dmr_file,
+  gff_file = gff_file,
+  format = "auto",
+  gene_table = NULL,
+  label_type = "name",
+  label_col = NULL,
   y_transform = "none",
-  label_top_n = 10,
+  chromosome_spacing = 1e6,
+  hyper_color = "#ff0000",
+  hypo_color = "#008800",
   point_size = 1,
   point_alpha = 0.5,
-  hyper_color = "#ff0000",
-  hypo_color = "#008800"
+  label_top_n = 10,
+  label_size = 3,
+  gap_frac = 0.04,
+  connector_dx1 = NULL,
+  connector_dx2 = NULL,
+  connector_elbow = 0.8,
+  connector_tilt_frac = 0.2
 )
 
 }

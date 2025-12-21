@@ -1,27 +1,30 @@
 #' @title Plot DMGs manhattan plot across chromosomes
-#' @description Plot genome-wide \bold{\emph{DMGs}} as a manhattan-style scatter plot, using chromosomes on x-axis and \code{meth.diff} on y-axis.
+#' @description Plot genome-wide DMGs \bold{\emph{manhattan}}.
 #' @author benben-miao
 #'
-#' @return A \bold{\emph{ggplot object}} of DMG manhattan plot.
+#' @return A \bold{\emph{ggplot}} object of DMG manhattan plot.
 #' @param dmr_file DEG table from \bold{\emph{MethylKit}} analysis.
-#' @param y_transform Y-axis transformation for \code{meth.diff}. (\bold{\emph{"none"}}, "log2", "log10"). Log transform uses \code{sign(x) * log(1 + abs(x), base)}.
-#' @param label_col Column name used for annotation labels. If \code{NULL}, uses \code{chr:start-end}.
-#' @param chromosome_spacing Gap width (bp) inserted between chromosomes on x-axis. (\bold{\emph{1e6}}).
 #' @param gff_file Genomic structural annotation \bold{\file{GFF3/GTF}} file path. If provided and \code{label_col} is \code{NULL}, will try to label by overlapped/nearest \code{gene_id}.
 #' @param format Format of GFF3/GTF file. (\bold{\emph{"auto"}}, "gff3", "gtf").
-#' @param label_type Label by gene name or gene id. (\bold{\emph{"name"}}, "id"). If \code{"name"} but no gene names can be inferred from \code{gff_file}, please provide \code{gene_table}.
 #' @param gene_table Optional gene ID/name mapping table (first two columns: id, name). If provided, will use gene name for labels when possible.
-#' @param label_top_n Number of top positive and top negative DMGs to label. (\bold{\emph{10}}).
+#' @param label_type Label by gene name or gene id. (\bold{\emph{"name"}}, "id"). If \code{"name"} but no gene names can be inferred from \code{gff_file}, please provide \code{gene_table}.
+#' @param label_col Column name used for annotation labels. If \code{NULL}, uses \code{chr:start-end}.
+#' @param y_transform Y-axis transformation for \code{meth.diff}. (\bold{\emph{"none"}}, "log2", "log10").
+#'
+#' @param chromosome_spacing Gap width (bp) inserted between chromosomes on x-axis. (\bold{\emph{1e6}}).
+#'
 #' @param hyper_color Color for hyper-methylated points. (\bold{\emph{"#ff0000"}}).
 #' @param hypo_color Color for hypo-methylated points. (\bold{\emph{"#008800"}}).
 #' @param point_size Point size. (\bold{\emph{1}}).
 #' @param point_alpha Point alpha. (\bold{\emph{0.5}}).
+#'
+#' @param label_top_n Number of top positive and top negative DMGs to label. (\bold{\emph{10}}).
 #' @param label_size Text size for labels. (\bold{\emph{3}}).
+#' @param gap_frac Minimum vertical gap between labels (fraction of y-range). (\bold{\emph{0.04}}).
 #' @param connector_dx1 First connector horizontal offset (bp). Default adapts to genome size.
 #' @param connector_dx2 Second connector horizontal offset (bp). Default adapts to genome size.
 #' @param connector_elbow Scale factor applied to \code{connector_dx2}. (\bold{\emph{0.8}}).
 #' @param connector_tilt_frac Tilt amplitude for the second connector segment as a fraction of \code{gap_frac}. (\bold{\emph{0.2}}).
-#' @param gap_frac Minimum vertical gap between labels (fraction of y-range). (\bold{\emph{0.04}}).
 #'
 #' @importFrom magrittr %>%
 #' @export
@@ -32,33 +35,50 @@
 #'   "example.dmr",
 #'   package = "GAnnoViz")
 #'
+#' gff_file <- system.file(
+#'   "extdata",
+#'   "example.gff3.gz",
+#'   package = "GAnnoViz")
+#'
 #' plot_dmg_manhattan(
 #'   dmr_file = dmr_file,
+#'   gff_file = gff_file,
+#'   format = "auto",
+#'   gene_table = NULL,
+#'   label_type = "name",
+#'   label_col = NULL,
 #'   y_transform = "none",
-#'   label_top_n = 10,
+#'   chromosome_spacing = 1e6,
+#'   hyper_color = "#ff0000",
+#'   hypo_color = "#008800",
 #'   point_size = 1,
 #'   point_alpha = 0.5,
-#'   hyper_color = "#ff0000",
-#'   hypo_color = "#008800"
+#'   label_top_n = 10,
+#'   label_size = 3,
+#'   gap_frac = 0.04,
+#'   connector_dx1 = NULL,
+#'   connector_dx2 = NULL,
+#'   connector_elbow = 0.8,
+#'   connector_tilt_frac = 0.2
 #' )
 #'
 plot_dmg_manhattan <- function(dmr_file,
-                               y_transform = c("none", "log2", "log10"),
+                               gff_file,
+                               format = "auto",
+                               gene_table = NULL,
+                               label_type = "name",
                                label_col = NULL,
-                               label_top_n = 10,
+                               y_transform = "none",
+                               chromosome_spacing = 1e6,
                                hyper_color = "#ff0000",
                                hypo_color = "#008800",
                                point_size = 1,
                                point_alpha = 0.5,
+                               label_top_n = 10,
                                label_size = 3,
+                               gap_frac = 0.04,
                                connector_dx1 = NULL,
                                connector_dx2 = NULL,
-                               gap_frac = 0.04,
-                               chromosome_spacing = 1e6,
-                               gff_file = NULL,
-                               format = "auto",
-                               gene_table = NULL,
-                               label_type = c("name", "id"),
                                connector_elbow = 0.8,
                                connector_tilt_frac = 0.2) {
   y_transform <- match.arg(y_transform)
@@ -91,7 +111,10 @@ plot_dmg_manhattan <- function(dmr_file,
   if (nrow(dmr) == 0)
     stop("No DMGs found on selected chromosomes")
 
-  dmr$end <- if ("end" %in% colnames(dmr)) dmr$end else dmr$start
+  dmr$end <- if ("end" %in% colnames(dmr))
+    dmr$end
+  else
+    dmr$start
   end_col <- dmr$end
   dmr$pos <- (dmr$start + dmr$end) / 2
 
@@ -116,9 +139,12 @@ plot_dmg_manhattan <- function(dmr_file,
 
   y_fun <- switch(
     y_transform,
-    none = function(x) x,
-    log2 = function(x) sign(x) * log(1 + abs(x), base = 2),
-    log10 = function(x) sign(x) * log10(1 + abs(x))
+    none = function(x)
+      x,
+    log2 = function(x)
+      sign(x) * log(1 + abs(x), base = 2),
+    log10 = function(x)
+      sign(x) * log10(1 + abs(x))
   )
   dmr$y <- y_fun(dmr$meth.diff)
   dmr$state <- ifelse(dmr$meth.diff >= 0, "hyper", "hypo")
@@ -127,9 +153,9 @@ plot_dmg_manhattan <- function(dmr_file,
   gene_id_mapped <- NULL
   label_vec <- NULL
   if (!is.null(label_col) &&
-    is.character(label_col) &&
-    length(label_col) == 1 &&
-    label_col %in% colnames(dmr)) {
+      is.character(label_col) &&
+      length(label_col) == 1 &&
+      label_col %in% colnames(dmr)) {
     label_vec <- as.character(dmr[[label_col]])
   } else {
     if (label_type == "name") {
@@ -154,15 +180,14 @@ plot_dmg_manhattan <- function(dmr_file,
     }
   }
   if (is.null(label_vec) && !is.null(gff_file)) {
-    genes <- extract_genes(gff_file = gff_file, format = format, gene_info = "all")
+    genes <- extract_genes(gff_file = gff_file,
+                           format = format,
+                           gene_info = "all")
     genes <- genes[as.character(GenomicRanges::seqnames(genes)) %in% chrom_levels]
     if (length(genes) > 0) {
       gr_dmr <- GenomicRanges::GRanges(
         seqnames = dmr$chr,
-        ranges = IRanges::IRanges(
-          start = as.integer(dmr$start),
-          end = as.integer(dmr$end)
-        )
+        ranges = IRanges::IRanges(start = as.integer(dmr$start), end = as.integer(dmr$end))
       )
       hits <- GenomicRanges::findOverlaps(gr_dmr, genes, ignore.strand = TRUE)
       gene_id <- rep(NA_character_, length(gr_dmr))
@@ -197,7 +222,8 @@ plot_dmg_manhattan <- function(dmr_file,
           gene_name[ok] <- as.character(gene_table$gene_name[idx[ok]])
       }
     }
-    if (all(is.na(gene_name) | gene_name == "") && !is.null(gff_file)) {
+    if (all(is.na(gene_name) |
+            gene_name == "") && !is.null(gff_file)) {
       infer_gene_name_map <- function(gff_file, ids, fmt) {
         ids <- unique(as.character(ids))
         ids <- ids[!is.na(ids) & ids != ""]
@@ -210,7 +236,8 @@ plot_dmg_manhattan <- function(dmr_file,
           gzfile(gff_file, open = "rt")
         else
           file(gff_file, open = "rt")
-        on.exit(try(close(con), silent = TRUE), add = TRUE)
+        on.exit(try(close(con), silent = TRUE)
+                , add = TRUE)
         repeat {
           lines <- readLines(con, n = 50000, warn = FALSE)
           if (length(lines) == 0)
@@ -219,7 +246,11 @@ plot_dmg_manhattan <- function(dmr_file,
           if (length(lines) == 0)
             next
           parts <- strsplit(lines, "\t", fixed = TRUE)
-          attrs <- vapply(parts, function(z) if (length(z) >= 9) z[[9]] else NA_character_, character(1))
+          attrs <- vapply(parts, function(z)
+            if (length(z) >= 9)
+              z[[9]]
+            else
+              NA_character_, character(1))
           attrs <- attrs[!is.na(attrs)]
           if (length(attrs) == 0)
             next
@@ -271,13 +302,22 @@ plot_dmg_manhattan <- function(dmr_file,
           gene_name[ok] <- unname(gmap[idx[ok]])
       }
     }
-    label_vec <- ifelse(!is.na(gene_name) & gene_name != "", gene_name, gene_id_mapped)
+    label_vec <- ifelse(!is.na(gene_name) &
+                          gene_name != "",
+                        gene_name,
+                        gene_id_mapped)
   }
   if (is.null(label_vec)) {
-    end_str <- if ("end" %in% colnames(dmr)) as.character(dmr$end) else as.character(dmr$start)
+    end_str <- if ("end" %in% colnames(dmr))
+      as.character(dmr$end)
+    else
+      as.character(dmr$start)
     label_vec <- paste0(dmr$chr, ":", dmr$start, "-", end_str)
   } else {
-    end_str <- if ("end" %in% colnames(dmr)) as.character(dmr$end) else as.character(dmr$start)
+    end_str <- if ("end" %in% colnames(dmr))
+      as.character(dmr$end)
+    else
+      as.character(dmr$start)
     interval_label <- paste0(dmr$chr, ":", dmr$start, "-", end_str)
     empty <- is.na(label_vec) | label_vec == ""
     label_vec[empty] <- interval_label[empty]
@@ -296,9 +336,18 @@ plot_dmg_manhattan <- function(dmr_file,
   df_top <- dplyr::bind_rows(df_pos, df_neg)
 
   p_base <- ggplot2::ggplot(dmr, ggplot2::aes(x = x, y = y, color = state)) +
-    ggplot2::geom_hline(yintercept = 0, color = "#333333", linewidth = 0.4) +
+    ggplot2::geom_hline(
+      yintercept = 0,
+      color = "#333333",
+      linewidth = 0.4
+    ) +
     ggplot2::geom_point(size = point_size, alpha = point_alpha) +
-    ggplot2::scale_color_manual(values = col_map, drop = FALSE, name = NULL, labels = c(hypo = "Hypo", hyper = "Hyper")) +
+    ggplot2::scale_color_manual(
+      values = col_map,
+      drop = FALSE,
+      name = NULL,
+      labels = c(hypo = "Hypo", hyper = "Hyper")
+    ) +
     ggplot2::scale_x_continuous(
       breaks = length_map$mid,
       labels = length_map$chr,
@@ -309,9 +358,6 @@ plot_dmg_manhattan <- function(dmr_file,
     my_theme()
 
   chr_bound <- length_map$cum_start[-1]
-  if (length(chr_bound) > 0) {
-    p_base <- p_base + ggplot2::geom_vline(xintercept = chr_bound, color = "#999999", linewidth = 0.3)
-  }
 
   if (nrow(df_top) == 0)
     return(p_base)
@@ -323,8 +369,14 @@ plot_dmg_manhattan <- function(dmr_file,
     y_range <- 1
 
   genome_len <- sum(length_map$end_col, na.rm = TRUE) + chrom_gap * max(0, nrow(length_map) - 1)
-  dx1 <- if (is.null(connector_dx1)) genome_len * 0.005 else connector_dx1
-  dx2 <- if (is.null(connector_dx2)) genome_len * 0.01 else connector_dx2
+  dx1 <- if (is.null(connector_dx1))
+    genome_len * 0.005
+  else
+    connector_dx1
+  dx2 <- if (is.null(connector_dx2))
+    genome_len * 0.01
+  else
+    connector_dx2
   elbow <- suppressWarnings(as.numeric(connector_elbow))
   if (!is.finite(elbow) || elbow <= 0)
     elbow <- 0.8
@@ -373,19 +425,39 @@ plot_dmg_manhattan <- function(dmr_file,
   df_lab$x3 <- df_lab$x2 + dx2
   df_lab$y3 <- df_lab$y_label + ifelse(is.na(df_lab$tilt), 0, df_lab$tilt)
 
-  df_seg1 <- data.frame(x = df_lab$x1, y = df_lab$y1, xend = df_lab$x2, yend = df_lab$y2)
-  df_seg2 <- data.frame(x = df_lab$x2, y = df_lab$y2, xend = df_lab$x3, yend = df_lab$y3)
+  df_seg1 <- data.frame(
+    x = df_lab$x1,
+    y = df_lab$y1,
+    xend = df_lab$x2,
+    yend = df_lab$y2
+  )
+  df_seg2 <- data.frame(
+    x = df_lab$x2,
+    y = df_lab$y2,
+    xend = df_lab$x3,
+    yend = df_lab$y3
+  )
 
   p_base +
     ggplot2::geom_segment(
       data = df_seg1,
-      ggplot2::aes(x = x, y = y, xend = xend, yend = yend),
+      ggplot2::aes(
+        x = x,
+        y = y,
+        xend = xend,
+        yend = yend
+      ),
       color = "#333333",
       linewidth = 0.4
     ) +
     ggplot2::geom_segment(
       data = df_seg2,
-      ggplot2::aes(x = x, y = y, xend = xend, yend = yend),
+      ggplot2::aes(
+        x = x,
+        y = y,
+        xend = xend,
+        yend = yend
+      ),
       color = "#333333",
       linewidth = 0.4
     ) +
